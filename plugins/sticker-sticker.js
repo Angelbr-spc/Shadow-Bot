@@ -31,7 +31,7 @@ let handler = async (m, { conn, args, usedPrefix, command}) => {
 │     *.sticker https://ejemplo.com/imagen.png*
 │
 │ 🚀 ¡Exprésate con estilo!
-╰──────────────────────────────╯`, m, rcanal)
+╰──────────────────────────────╯`, m, )
 }
 
       let out
@@ -60,7 +60,7 @@ let handler = async (m, { conn, args, usedPrefix, command}) => {
 }
 } finally {
     if (stiker) {
-      conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, rcanal)
+      conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, )
 } else {
       return conn.reply(m.chat,
 `╭─〔 🤖 *STICKER BOT* 🤖 〕─╮
@@ -71,7 +71,7 @@ let handler = async (m, { conn, args, usedPrefix, command}) => {
 │     válido, o prueba con un enlace directo.
 │
 │ 📌 Si necesitas ayuda, usa *.menu*
-╰────────────────────────────╯`, m, rcanal)
+╰────────────────────────────╯`, m, )
 }
 }
 }

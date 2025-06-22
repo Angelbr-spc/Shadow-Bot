@@ -8,7 +8,7 @@ const clockString = ms => {
   return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':');
 };
 
-const imagen = "https://files.catbox.moe/ltq7ph.jpg";
+const imagen = "https://qu.ax/tNPfx.jpg";
 
 const menuHeader = `
 ╭─❒ 「 *📍 BARBOZA MD* 」
@@ -27,7 +27,7 @@ const menuFooter = `
 ╭─❒ 「 *📌 INFO FINAL* 」
 │ ⚠️ *Usa los comandos con el prefijo correspondiente.*
 
-> Creado por Barboza-Team
+> Creado por 𝐒𝐡𝐚𝐝𝐨𝐰-Team
 ╰❒
 `.trim();
 

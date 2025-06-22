@@ -1,5 +1,5 @@
 
-// Código Hecho Por Barboza
+// Código Hecho Por 𝐒𝐡𝐚𝐝𝐨𝐰
 let handler = async (m, { conn }) => {
     // React con un emoji al mensaje
     await m.react('⭐');
