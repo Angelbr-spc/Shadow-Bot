@@ -20,7 +20,18 @@ const handler = async (m, {text, usedPrefix, command, conn}) => {
   if (aaaa == '') throw `*${tradutor.texto2}*`;                                        /* https://wwv.cuevana8.com */
   const res = await aaaa.map((v) => `*${tradutor.texto3[0]}* ${v.title}\n*${tradutor.texto3[1]}* ${v.link}`).join`\n\n─────────────────\n\n`;
   const ads = `*${tradutor.texto3[2]}* ${tradutor.texto3[3]}\n*${tradutor.texto3[4]}* https://block-this.com/block-this-latest.apk\n\n≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣≣\n\n`;
-  conn.sendMessage(m.chat, {image: {url: img}, caption: ads + res}, {quoted: m});
+  conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+image: {url: img}, caption: ads + res}, {quoted: m});
  } catch {
    return conn.sendMessage(m.chat, {text: '*[❗] Error, no se obtuvieron resultados.'}, {quoted: m});   
  }    

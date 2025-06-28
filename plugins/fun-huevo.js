@@ -25,7 +25,18 @@ const handler = async (m, { conn, usedPrefix, command, text }) => {
 
     const abrazo = await conn.reply(m.chat, str, m, { mentions: mentionedJid });
 
-    conn.sendMessage(m.chat, { react: { text: '🍆', key: abrazo.key } });
+    conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ react: { text: '🍆', key: abrazo.key } });
   }
 };
 

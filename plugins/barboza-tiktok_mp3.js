@@ -25,7 +25,18 @@ let img = 'https://files.catbox.moe/51xcx4.jpg';
 
 await conn.sendFile(m.chat, img, 'thumbnail.jpg', ttt, m, null);
 
-conn.sendMessage(m.chat, { audio: { url: aud }, mimetype: 'audio/mpeg' }, { quoted: m });
+conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ audio: { url: aud }, mimetype: 'audio/mpeg' }, { quoted: m });
 m.react('✅');
 
 } catch (e) {

@@ -8,7 +8,18 @@ const handler = async (m, { conn }) => {
 
     // Verificar si el usuario ES el owner. Si lo es, se deniega el acceso.
     if (m.sender === global.owner.number) { // Reemplaza global.owner.number con tu ID de owner
-        await conn.sendMessage(m.chat, { text: 'Este comando no está disponible para el owner.' }, { quoted: fkontak });
+        await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: 'Este comando no está disponible para el owner.' }, { quoted: fkontak });
         return;
     }
 

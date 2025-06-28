@@ -2,7 +2,18 @@
 import axios from 'axios'
 
 let HS = async (m, { conn, text }) => {
-if (!text) return conn.reply(m.chat, `❀ Ingresa el ID de un usuario de Free Fire que quieras stalkear`, m)
+if (!text) return conn.sendMessage(m.chat, { text: `❀ Ingresa el ID de un usuario de Free Fire que quieras stalkear`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
 
 try {
 let api = await axios.get(`https://vapis.my.id/api/ff-stalk?id=${text}`)
@@ -52,7 +63,18 @@ HS += `*[ INFO - LIDER CLAN ]*
   - *Fecha de Creación:* ${ketua_guild.create_time}
   - *Último Inicio de Sesión:* ${ketua_guild.last_login}`
 
-await conn.sendMessage(m.chat, { text: HS }, { quoted: m })
+await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: HS }, { quoted: m })
 } catch (error) {
 console.error(error)
 }}

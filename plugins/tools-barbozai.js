@@ -21,6 +21,17 @@ const handler = async (m, { conn, args }) => {
     const imageUrl = apiUrl;
 
     await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
       image: { url: imageUrl },
       caption: `✨ Imagen generada con el texto: "${text}"`,
     }, { quoted: m });
@@ -31,7 +42,18 @@ const handler = async (m, { conn, args }) => {
     console.error('Error al generar la imagen:', error);
     await m.react('❌');
 
-    conn.reply(m.chat, `❌ Ocurrió un error al generar la imagen: ${error.message}`, m);
+    conn.sendMessage(m.chat, { text: `❌ Ocurrió un error al generar la imagen: ${error.message}`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
   }
 };
 

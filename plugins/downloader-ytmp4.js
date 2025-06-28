@@ -106,7 +106,18 @@ const checkRequestLimit = () => {
 // Handler principal
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) {
-    return conn.reply(m.chat, `👉 Uso: ${usedPrefix}${command} https://youtube.com/watch?v=iQEVguV71sI`, m);
+    return conn.sendMessage(m.chat, { text: `👉 Uso: ${usedPrefix}${command} https://youtube.com/watch?v=iQEVguV71sI`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
   }
 
   if (!isValidYouTubeUrl(text)) {

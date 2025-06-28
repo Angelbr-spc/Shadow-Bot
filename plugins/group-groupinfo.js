@@ -37,11 +37,33 @@ let handler = async (m, { conn, participants, groupMetadata}) => {
 ${groupMetadata.desc?.toString() || 'Sin descripción definida.'}
 `.trim();
 
-    await conn.sendMessage(m.chat, { text, mentions: [...groupAdmins.map(v => v.id), ownerId]}, { quoted: m});
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text, mentions: [...groupAdmins.map(v => v.id), ownerId]}, { quoted: m});
 
 } catch (e) {
     console.error(e);
-    conn.reply(m.chat, '⚠️ Ocurrió un error al obtener la información del grupo.', m);
+    conn.sendMessage(m.chat, { text: '⚠️ Ocurrió un error al obtener la información del grupo.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 }
 };
 

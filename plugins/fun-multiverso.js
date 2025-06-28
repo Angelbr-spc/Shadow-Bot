@@ -19,7 +19,18 @@ const handler = async (m, { conn}) => {
     conn.multiverseGame = conn.multiverseGame || {};
     conn.multiverseGame[m.chat] = {};
 
-    await conn.sendMessage(m.chat, { text: mensaje});
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: mensaje});
 };
 
 handler.before = async (m, { conn}) => {
@@ -35,7 +46,18 @@ handler.before = async (m, { conn}) => {
             const usuario = conn.getName(m.sender);
             conn.multiverseGame[m.chat] = { nombre: usuario, mision: misionSeleccionada};
 
-            await conn.reply(m.chat, `✅ *${usuario} ha elegido:* ${misionSeleccionada}\n⌛ Preparándose para viajar entre dimensiones...`, m);
+            await conn.sendMessage(m.chat, { text: `✅ *${usuario} ha elegido:* ${misionSeleccionada}\n⌛ Preparándose para viajar entre dimensiones...`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
             setTimeout(() => {
                 const resultado = [

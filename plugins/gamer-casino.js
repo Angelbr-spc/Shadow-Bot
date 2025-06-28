@@ -30,7 +30,18 @@ let handler = async (m, { conn, args, usedPrefix, command, DevMode }) => {
         if (user.limit >= count * 1) {
             user.limit -= count * 1
             if (Aku > Kamu) {
-                conn.reply(m.chat, '`🍟 Veamos que numeros tienen!`\n\n'+ `➠ *🍫 Sumi Sakurasawa* : ${Aku}\n➠ *${username}* : ${Kamu}\n\n> ${username}, *PERDISTE* ${formatNumber(count)} 🍬 Dulces.`.trim(), m, )
+                conn.sendMessage(m.chat, { text: '`🍟 Veamos que numeros tienen!`\n\n'+ `➠ *🍫 Sumi Sakurasawa* : ${Aku}\n➠ *${username}* : ${Kamu}\n\n> ${username}, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: *PERDISTE* ${formatNumber(count })} 🍬 Dulces.`.trim(), m, )
             } else if (Aku < Kamu) {
                 user.limit += count * 2
                 conn.reply(m.chat, '`🍟 Veamos que numeros tienen!`\n\n'+ `➠ *🍫 Sumi Sakurasawa* : ${Aku}\n➠ *${username}* : ${Kamu}\n\n> ${username}, *GANASTE* ${formatNumber(count * 2)} 🍬 Dulces.`.trim(), m, )

@@ -24,7 +24,18 @@ const handler = async (m, { conn}) => {
         m.reply('✅ *¡Imagen del menú cambiada con éxito!* 😃📸');
 
         // Enviar la nueva imagen del menú para confirmar el cambio
-        await conn.sendMessage(m.chat, { image: { url: path}, caption: '📌 *Nueva imagen del menú aplicada.*'});
+        await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ image: { url: path}, caption: '📌 *Nueva imagen del menú aplicada.*'});
 
 } catch (error) {
         console.error(error);

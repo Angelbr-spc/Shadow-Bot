@@ -70,7 +70,18 @@ END:VCARD`
   if (chat.detect && eventos[m.messageStubType]) {
     let evento = eventos[m.messageStubType];
     if (evento.tipo === 'texto') {
-      await conn.sendMessage(m.chat, { text: evento.mensaje, mentions: [m.sender]}, { quoted: fkontak});
+      await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: evento.mensaje, mentions: [m.sender]}, { quoted: fkontak});
 } else if (evento.tipo === 'imagen') {
       await conn.sendMessage(m.chat, { image: { url: evento.imagen}, caption: evento.mensaje, mentions: [m.sender]}, { quoted: fkontak});
 }

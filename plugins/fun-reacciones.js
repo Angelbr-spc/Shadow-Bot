@@ -75,7 +75,18 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
   conn.sendMessage(
     m.chat,
-    { video: gifToVideoBuffer, caption: `(${senderName}) ${translatedCommand} ${targetName}`, gifPlayback: true, gifAttribution: 0 },
+    {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ video: gifToVideoBuffer, caption: `(${senderName}) ${translatedCommand} ${targetName}`, gifPlayback: true, gifAttribution: 0 },
     { quoted: m }
   );
 }

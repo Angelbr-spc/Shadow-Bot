@@ -24,6 +24,17 @@ const fetchWithRetries = async (url, maxRetries = 2) => {
 let handler = async (m, { conn, text, usedPrefix }) => {
   if (!text || !/^https:\/\/(www\.)?youtube\.com\/watch\?v=/.test(text)) {
     return conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
       text: `⚠️ *¡Atención!*\n\n💡 *Por favor ingresa un enlace válido de YouTube para descargar el video.*\n\n📌 *Ejemplo:* ${usedPrefix}ytv https://www.youtube.com/watch?v=dQw4w9WgXcQ`,
     });
   }

@@ -1,6 +1,17 @@
 let handler = async (m, { usedPrefix, command, text, conn }) => {
     let mentionedJid = m.mentionedJid[0] || text;
-    if (!mentionedJid) return conn.reply(m.chat, `⚠️ Menciona a alguien para asustarlo.\nEjemplo: ${usedPrefix + command} @usuario`, m);
+    if (!mentionedJid) return conn.sendMessage(m.chat, { text: `⚠️ Menciona a alguien para asustarlo.\nEjemplo: ${usedPrefix + command} @usuario`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
     const progreso = [
         "*🕒 Iniciando acceso a la cuenta...*",
@@ -21,7 +32,18 @@ let handler = async (m, { usedPrefix, command, text, conn }) => {
     ];
 
   
-    const { key } = await conn.sendMessage(m.chat, { text: progreso[0] }, { quoted: m });
+    const { key } = await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: progreso[0] }, { quoted: m });
 
     
     for (let i = 1; i < progreso.length; i++) {

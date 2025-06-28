@@ -8,7 +8,18 @@ const handler = async (m, { conn, args }) => {
     // Validar el formato de la hora
     const horaRegex = /^([01]\d|2[0-3]):?([0-5]\d)$/;
     if (!horaRegex.test(args[0])) {
-        conn.reply(m.chat, 'Formato de hora incorrecto. Debe ser HH:MM en formato de 24 horas.', m);
+        conn.sendMessage(m.chat, { text: 'Formato de hora incorrecto. Debe ser HH:MM en formato de 24 horas.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
         return;
     }
 
@@ -84,7 +95,18 @@ const handler = async (m, { conn, args }) => {
 🥷🏻 ┇
 `.trim();
 
-    conn.sendMessage(m.chat, { text: message }, { quoted: m });
+    conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: message }, { quoted: m });
 };
 handler.help = ['interna4']
 handler.tags = ['freefire']

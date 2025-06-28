@@ -5,7 +5,18 @@ if (!text) throw `*[❗] Ingrese un enlace de X (twitter), ejemplo: ${usedPrefix
 if (enviando) return;
     enviando = true;
 try {
-   await conn.sendMessage(m.chat, {text: global.wait}, {quoted: m}); 
+   await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+text: global.wait}, {quoted: m}); 
    const res = await TwitterDL(text);
  if (res?.result.type == 'video') {
      const caption = res?.result.caption ? res.result.caption : '*Aquí tiene su imagen*';

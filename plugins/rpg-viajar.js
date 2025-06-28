@@ -16,7 +16,18 @@ let handler = async (m, { conn }) => {
     const mensajeViaje = `¡Tu mascota está lista para viajar! 🐾✈️\nDestino: ${destinoElegido}\n¡Prepárate para la aventura!`;
 
     // Enviamos el mensaje al chat
-    await conn.sendMessage(m.chat, { text: mensajeViaje }, { quoted: m });
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: mensajeViaje }, { quoted: m });
 }
 
 handler.help = ['viajar'];

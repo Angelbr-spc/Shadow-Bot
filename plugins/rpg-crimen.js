@@ -32,6 +32,17 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
       users[senderId].limit += amountTaken;
       users[randomUserId].limit = Math.max(randomUserLimit - amountTaken, 0);
       conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
         text: `🍭 ¡Lograste cometer tu crimen con éxito! Acabas de robar *${amountTaken} 🍭 Dulces* a @${randomUserId.split("@")[0]}.\n\nSe suman *+${amountTaken} 🍭 Dulces* a ${senderName}.`,
         contextInfo: { mentionedJid: [randomUserId] }
       }, { quoted: m });

@@ -8,7 +8,18 @@ let handler = async (m, { conn }) => {
     let mensajeFinal = `¡Felicidades! Tu mascota ha subido de nivel.\nNivel Actual: ${nivelActual}\nNuevo Nivel: ${nuevoNivel} 🎉🐾`;
 
     // Enviamos el mensaje al chat
-    await conn.sendMessage(m.chat, { text: mensajeFinal }, { quoted: m });
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: mensajeFinal }, { quoted: m });
 }
 
 handler.help = ['level'];

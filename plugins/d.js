@@ -3,7 +3,18 @@ import path from 'path';
 
 var handler = async (m, { conn, usedPrefix }) => {
     if (global.conn.user.jid !== conn.user.jid) {
-        return conn.reply(m.chat, '☯︎ *Utiliza este comando directamente en el número principal del Bot*', m);
+        return conn.sendMessage(m.chat, { text: '☯︎ *Utiliza este comando directamente en el número principal del Bot*', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     }
 
     await conn.reply(m.chat, '🂱 *Iniciando proceso de eliminación de todos los archivos de sesión, excepto el archivo creds.json...*', m);

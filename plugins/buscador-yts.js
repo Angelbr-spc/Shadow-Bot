@@ -13,7 +13,18 @@ let ytSearchHandler = async (m, { conn, text, usedPrefix, command }) => {
   text = text.trim();
 
   // Notificar que se está realizando la búsqueda
-  await conn.reply(m.chat, `Buscando en YouTube por: ${text}`, m);
+  await conn.sendMessage(m.chat, { text: `Buscando en YouTube por: ${text}`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
   try {
     // Realizar la búsqueda en YouTube
@@ -36,7 +47,18 @@ let ytSearchHandler = async (m, { conn, text, usedPrefix, command }) => {
       // Enviar mensaje con imagen y descripción
       await conn.sendMessage(
         m.chat,
-        { image: { url: video.image }, caption },
+        {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ image: { url: video.image }, caption },
         { quoted: m }
       );
     }

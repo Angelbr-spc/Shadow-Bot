@@ -17,7 +17,18 @@ let sugerirHandler = async (m, { conn, text, usedPrefix }) => {
 
 
   let ownerJid = '584146277368@s.whatsapp.net' 
-  await conn.sendMessage(ownerJid, { text: teks, mentions: [m.sender] })
+  await conn.sendMessage(ownerJid, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: teks, mentions: [m.sender] })
 
 
   let staffGroup = '120363401544736737@g.us' 

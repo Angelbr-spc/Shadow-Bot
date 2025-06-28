@@ -57,7 +57,18 @@ let handler = async (m, { conn, command }) => {
     let accion = acciones[command];
     let mensajeAleatorio = accion.mensajes[Math.floor(Math.random() * accion.mensajes.length)];
 
-    await conn.sendMessage(m.chat, { react: { text: accion.emoji, key: m.key }});
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ react: { text: accion.emoji, key: m.key }});
     await m.reply(`${mensajeAleatorio}\n🎁 ¡Ganaste *${premio.cantidad}* ${premio.tipo}!`);
 };
 

@@ -23,7 +23,18 @@ const mate = async (m, { conn}) => {
         resultado,
         timeout: setTimeout(() => {
             if (conn.mathGame[m.chat]) {
-                conn.reply(m.chat, `⏰ Tiempo agotado. La respuesta correcta era *${resultado}*.`, m);
+                conn.sendMessage(m.chat, { text: `⏰ Tiempo agotado. La respuesta correcta era *${resultado}*.`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
                 delete conn.mathGame[m.chat];
 }
 }, timeout)

@@ -15,7 +15,18 @@ let isProcessing = false;
 
 // Función para enviar respuestas rápidas
 const reply = (texto, conn, m) => {
-    conn.sendMessage(m.chat, { 
+    conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ 
         text: texto, 
     }, { quoted: m });
 };

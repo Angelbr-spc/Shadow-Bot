@@ -1,6 +1,17 @@
 
 const handler = async (m, { conn, args}) => {
-    if (!args[0]) return conn.reply(m.chat, "❌ *Debes proporcionar el código a analizar!*", m);
+    if (!args[0]) return conn.sendMessage(m.chat, { text: "❌ *Debes proporcionar el código a analizar!*", 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
     const codigo = args.join(" ");
 

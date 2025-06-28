@@ -33,6 +33,17 @@ var handler = async (m, { conn, args, usedPrefix, command }) => {
         await conn.sendMessage(
             m.chat,
             {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
                 audio: fs.readFileSync(convertedPath),
                 mimetype: "audio/mp3",
                 fileName: "tiktok_audio.mp3",
@@ -45,7 +56,18 @@ var handler = async (m, { conn, args, usedPrefix, command }) => {
         fs.unlinkSync(filePath);
         fs.unlinkSync(convertedPath);
 
-        await conn.reply(m.chat, "✅ *Audio convertido y enviado correctamente.*", m);
+        await conn.sendMessage(m.chat, { text: "✅ *Audio convertido y enviado correctamente.*", 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     } catch (error) {
         console.error(error);
         conn.reply(m.chat, `❌ *Error:* ${error.message || "No se pudo procesar la solicitud."}`, m);

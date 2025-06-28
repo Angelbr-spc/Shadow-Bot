@@ -59,7 +59,18 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
  if (!apiResponse.status || !apiResponse.download_url) throw new Error("La API de Zenz ytmp3 no devuelve resultados válidos.");
  const { title, author, lengthSeconds, views, thumbnail, download_url } = apiResponse;
  const caption = `╭─── 「 YOUTUBE AUDIO 」\n│\n├─ 🎵 *Título:* ${title}\n├─ 👤 *Canal:* ${author}\n├─ ⏱️ *Duración:* ${formatDuration(lengthSeconds)}\n├─ ▶️ *Vistas:* ${views.toLocaleString('es-AR')}\n│\n╰─── 「 ${botName} 」`;
- await conn.sendMessage(m.chat, { image: { url: thumbnail }, caption: caption }, { quoted: m });
+ await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ image: { url: thumbnail }, caption: caption }, { quoted: m });
  await conn.sendMessage(m.chat, { audio: { url: download_url }, mimetype: 'audio/mpeg', fileName: `${title}.mp3` }, { quoted: m });
  } else {
  await m.reply("⏳ Obteniendo video (MP4) de YouTube...");

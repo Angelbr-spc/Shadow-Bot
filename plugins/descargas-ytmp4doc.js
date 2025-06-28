@@ -45,6 +45,17 @@ let HS = async (m, { conn, text }) => {
     await conn.sendMessage(
       m.chat,
       {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
         document: { url: dl_url },
         fileName: `${title}.mp4`,
         mimetype: 'video/mp4',

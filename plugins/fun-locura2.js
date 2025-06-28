@@ -46,14 +46,36 @@ _*🎶 Enviando música...*_`.trim();
         if (result.data.url) {
             const downloadUrl = result.data.url;
             const filename = `${result.data.title || 'audio'}.mp3`;
-            await conn.sendMessage(m.chat, { audio: { url: downloadUrl }, fileName: filename, mimetype: 'audio/mpeg', caption: `╭━❰  *YouTube*  ❱━⬣\n${filename}\n╰━❰ *${botname}* ❱━⬣`, quoted: m });
+            await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ audio: { url: downloadUrl }, fileName: filename, mimetype: 'audio/mpeg', caption: `╭━❰  *YouTube*  ❱━⬣\n${filename}\n╰━❰ *${botname}* ❱━⬣`, quoted: m });
         } else {
             throw new Error('_*[ ❌ ] Ocurrió un error al descargar el archivo mp3_');
         }
 
     } catch (e) {
 
-        await conn.reply(m.chat, `❌ _*Comando Spotify Fallo Instenta Nuevamente*_`, m);
+        await conn.sendMessage(m.chat, { text: `❌ _*Comando Spotify Fallo Instenta Nuevamente*_`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
         console.log(`❌ Spotify Fallo`);
         console.log(e);

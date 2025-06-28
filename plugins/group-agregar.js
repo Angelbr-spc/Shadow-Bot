@@ -16,7 +16,18 @@ var handler = async (m, { conn, args, text, usedPrefix, command }) => {
 
     // Verificar si las restricciones están activadas
     if (!global.db.data.settings[conn.user.jid].restrict) {
-        return conn.reply(m.chat, `🚩 *Este comando está deshabilitado por mi creador*`, m);
+        return conn.sendMessage(m.chat, { text: `🚩 *Este comando está deshabilitado por mi creador*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     }
 
     // Verificar si no se ha ingresado un número para añadir

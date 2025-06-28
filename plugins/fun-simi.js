@@ -34,7 +34,18 @@ const prompt = `${basePrompt}. La imagen que se analiza es: ${imageAnalysis.resu
 
 const description = await luminsesi(query, username, prompt)
 
-await conn.reply(m.chat, description, m)
+await conn.sendMessage(m.chat, { text: description, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
 
 } catch (error) {
 

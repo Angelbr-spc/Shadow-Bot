@@ -35,7 +35,18 @@ let handler = async (m, { conn, usedPrefix, args }) => {
     let chat = global.db?.data?.chats?.[m.chat];
 
     if (!chat) {
-      return conn.reply(m.chat, "⚠️ No se pudo acceder a la base de datos del grupo.", m);
+      return conn.sendMessage(m.chat, { text: "⚠️ No se pudo acceder a la base de datos del grupo.", 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     }
 
     if (chat.primaryBot === botJid) {
@@ -44,6 +55,17 @@ let handler = async (m, { conn, usedPrefix, args }) => {
 
     chat.primaryBot = botJid;
     conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
       text: `✅ El bot @${botJid.split("@")[0]} ha sido establecido como primario en este grupo. Los demás bots no responderán aquí.`,
       mentions: [botJid]
     }, { quoted: m });

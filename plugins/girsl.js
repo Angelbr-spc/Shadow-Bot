@@ -56,7 +56,18 @@ const imageCarouselHandler = async (m, { conn, command, usedPrefix, text = "girl
     await conn.relayMessage(m.chat, carouselMsg.message, { messageId: carouselMsg.key.id });
   } catch (error) {
     console.error(error);
-    conn.reply(m.chat, "❌ Error al obtener las imágenes para el carrusel", m);
+    conn.sendMessage(m.chat, { text: "❌ Error al obtener las imágenes para el carrusel", 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
   }
 };
 

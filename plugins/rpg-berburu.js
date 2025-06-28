@@ -71,7 +71,18 @@ const handler = async (m, {conn}) => {
   global.db.data.users[m.sender].ayam += rbrb12;
 
   const time = global.db.data.users[m.sender].lastberburu + 2700000; // 45 Minutos
-  if (new Date - global.db.data.users[m.sender].lastberburu < 2700000) return conn.reply(m.chat, `Por favor descansá un momento para seguir cazando\n\n⫹⫺ Tiempo ${clockString(time - new Date())}\n${wm}`, m);
+  if (new Date - global.db.data.users[m.sender].lastberburu < 2700000) return conn.sendMessage(m.chat, { text: `Por favor descansá un momento para seguir cazando\n\n⫹⫺ Tiempo ${clockString(time - new Date())}\n${wm}`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
   setTimeout(() => {
     conn.reply(m.chat, hsl, m);

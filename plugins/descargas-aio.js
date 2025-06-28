@@ -91,6 +91,17 @@ Xiaohongshu(RedNote) Video/Photo Downloader\`\`\``);
                 await conn.sendMessage(
         m.chat,
         {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
           video: { url: url },
           mimetype: 'video/mp4',
           fileName: title + " • " + source + '.mp4',

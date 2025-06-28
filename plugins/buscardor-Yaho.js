@@ -5,7 +5,18 @@ import fetch from 'node-fetch';
 
 let MF = async(m, { conn, args }) => {
 
-if (!args[0]) return conn.reply(m.chat, '🌙 INGRESE UN TEXTO PARA BUSCAR EN YAHOO', m);
+if (!args[0]) return conn.sendMessage(m.chat, { text: '🌙 INGRESE UN TEXTO PARA BUSCAR EN YAHOO', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
 try {
 let api = await (await fetch(`https://archive-ui.tanakadomp.biz.id/search/yahoosearch?q=${args[0]}`)).json();
@@ -22,7 +33,18 @@ moon += `☪︎ *Descripción:* ${force.snippet}\n`
 moon += `───── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ─────`
 }
 
-conn.sendMessage(m.chat, { text: moon }, { quoted: m });
+conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: moon }, { quoted: m });
 
 } catch (e) {
 m.reply(`*Error En La Api*`);

@@ -16,7 +16,18 @@ const handler = async (m, { conn, args }) => {
     const data = await response.json();
 
     if (!data || !data.result || data.result.length === 0) {
-      return conn.reply(m.chat, '❌ No se encontraron aplicaciones. Intenta con otro nombre.', m);
+      return conn.sendMessage(m.chat, { text: '❌ No se encontraron aplicaciones. Intenta con otro nombre.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     }
 
     let results = `📱 *Resultados de la búsqueda en Play Store para:* ${query}\n\n`;

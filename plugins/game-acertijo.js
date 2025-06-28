@@ -5,7 +5,18 @@ const handler = async (m, {conn, usedPrefix}) => {
   conn.tekateki = conn.tekateki ? conn.tekateki : {};
   const id = m.chat;
   if (id in conn.tekateki) {
-    conn.reply(m.chat, '*Todavía hay acertijos sin responder en este chat*', conn.tekateki[id][0]);
+    conn.sendMessage(m.chat, { text: '*Todavía hay acertijos sin responder en este chat*', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: conn.tekateki[id][0] });
     throw false;
   }
   const tekateki = JSON.parse(fs.readFileSync(`./storage/game/acertijo.json`));

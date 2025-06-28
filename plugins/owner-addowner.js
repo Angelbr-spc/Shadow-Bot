@@ -20,7 +20,18 @@ const handler = async (m, { conn, text, args, usedPrefix, command}) => {
 
       if (index!== -1) {
         global.owner.splice(index, 1);
-        await conn.reply(m.chat, `${emojiRemove} El número ha sido eliminado correctamente de la lista de owners.`, m);
+        await conn.sendMessage(m.chat, { text: `${emojiRemove} El número ha sido eliminado correctamente de la lista de owners.`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 } else {
         await conn.reply(m.chat, `${emojiWarning} El número no está en la lista de owners.`, m);
 }

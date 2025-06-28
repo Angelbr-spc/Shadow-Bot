@@ -50,6 +50,17 @@ const sendAudioWithRetry = async (conn, chat, audioUrl, videoTitle, maxRetries =
       await conn.sendMessage(
         chat,
         {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
           audio: { url: audioUrl },
           mimetype: 'audio/mpeg',
           contextInfo: {
@@ -77,7 +88,18 @@ const sendAudioWithRetry = async (conn, chat, audioUrl, videoTitle, maxRetries =
 
 let handler = async (m, { conn, text }) => {
   if (!text?.trim() || (!text.includes('youtube.com') && !text.includes('youtu.be'))) {
-    await conn.reply(m.chat, `❗ *Debes Ingresar Un Enlace De YouTube Válido.*`, m);
+    await conn.sendMessage(m.chat, { text: `❗ *Debes Ingresar Un Enlace De YouTube Válido.*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     return;
   }
 

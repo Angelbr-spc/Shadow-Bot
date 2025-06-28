@@ -99,6 +99,17 @@ const sendAudioNormal = async (conn, chat, audioUrl, videoTitle) => {
       await conn.sendMessage(
         chat,
         {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
           audio: { url: audioUrl },
           mimetype: 'audio/mpeg',
           contextInfo: {
@@ -158,9 +169,19 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
   const limaTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Lima' }));
   const userNumber = m.sender.split('@')[0];
-  const reactionMessage = await conn.reply(
-    m.chat,
-    `${getUserGreeting(userNumber, limaTime)},\nEstoy buscando la música solicitada...`,
+  const reactionMessage = await conn.sendMessage(
+    m.chat, { text: `${getUserGreeting(userNumber, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: limaTime })},\nEstoy buscando la música solicitada...`,
     m,
     { mentions: [m.sender] }
   );

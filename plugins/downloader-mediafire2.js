@@ -6,7 +6,18 @@ const apiBase64 = 'aHR0cHM6Ly9yZXN0YXBpLmFwaWJvdHdhLmJpei5pZC9hcGkvbWVkaWFmaXJlP
 const apiUrl = Buffer.from(apiBase64, 'base64').toString('utf-8');
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-  if (!args[0]) return conn.reply(m.chat, '🚩 Ingrese el enlace de un archivo de Mediafire.', m);
+  if (!args[0]) return conn.sendMessage(m.chat, { text: '🚩 Ingrese el enlace de un archivo de Mediafire.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
   if (!args[0].match(/mediafire/gi)) return conn.reply(m.chat, '🌸 El enlace debe ser de un archivo de Mediafire.', m);
 
   try {

@@ -25,7 +25,18 @@ var handler = async (m, { conn, text }) => {
 
     if (currentTime - lastClaim < oneYearMs) { 
         const remainingTime = msToTime(oneYearMs - (currentTime - lastClaim)); 
-        return conn.reply(m.chat, `🕚 *Ya has reclamado tu recompensa anual. Vuelve en ${remainingTime}*`, m); 
+        return conn.sendMessage(m.chat, { text: `🕚 *Ya has reclamado tu recompensa anual. Vuelve en ${remainingTime}*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m }); 
     } 
 
     // Actualiza las recompensas usando desestructuración para mayor concisión y mejor legibilidad 

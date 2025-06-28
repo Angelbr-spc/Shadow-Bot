@@ -13,7 +13,18 @@ const handler = async (m, { conn}) => {
     conn.raceGame = conn.raceGame || {};
     conn.raceGame[m.chat] = { jugadores};
 
-    await conn.sendMessage(m.chat, { text: mensajeInicial});
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: mensajeInicial});
 };
 
 handler.before = async (m, { conn}) => {
@@ -27,7 +38,18 @@ handler.before = async (m, { conn}) => {
 
             conn.raceGame[m.chat].jugadores[m.sender] = { nombre: usuario, auto: autoSeleccionado};
 
-            await conn.reply(m.chat, `✅ *${usuario} ha elegido:* ${autoSeleccionado}\n⌛ Esperando más jugadores...`, m);
+            await conn.sendMessage(m.chat, { text: `✅ *${usuario} ha elegido:* ${autoSeleccionado}\n⌛ Esperando más jugadores...`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
             setTimeout(() => {
                 if (Object.keys(conn.raceGame[m.chat].jugadores).length> 1) {

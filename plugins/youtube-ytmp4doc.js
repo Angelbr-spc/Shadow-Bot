@@ -14,7 +14,18 @@ let pene = await(await fetch(`https://delirius-apiofc.vercel.app/download/ytmp4?
 let texto = `「❖」𝗥𝗲𝘀𝘂𝗹𝘁𝗮𝗱𝗼 𝗗𝗲 ${pene.data.title}\n\n✦ *Autor:* ${pene.data.author}\n✦ *Duración:* ${pene.data.duration}\n✦ *Comentarios:* ${pene.data.comments}\n✦ *Vistas:* ${pene.data.views}\n> ${dev}`
 
 m.react('🕒')
-conn.sendMessage(m.chat, { image: { url: pene.data.image }, caption: texto }, { quoted: m });
+conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ image: { url: pene.data.image }, caption: texto }, { quoted: m });
 m.react('✅');
 
 if (command == 'ytmp3doc' || command == 'mp3doc' || command == 'ytadoc') {

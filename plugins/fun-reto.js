@@ -1,5 +1,16 @@
 let handler  = async (m, { conn }) => {
-conn.reply(m.chat,`*┌────「 FUN - RETO 」─*\n*“${pickRandom(global.bucin)}”*\n*└────「 BARBOZA-BOT 」─*`, m)
+conn.sendMessage(m.chat, { text: `*┌────「 FUN - RETO 」─*\n*“${pickRandom(global.bucin)}”*\n*└────「 BARBOZA-BOT 」─*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
 }
 handler.help = ['reto']
 handler.tags = ['fun']

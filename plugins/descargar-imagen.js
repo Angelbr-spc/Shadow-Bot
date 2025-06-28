@@ -83,7 +83,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     await delay(1000)
 
-    await conn.sendMessage(m.chat, { 
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ 
         image: { url: link }, 
         caption: `*🔎 Resultado De: ${text}*`, 
         footer: dev, 

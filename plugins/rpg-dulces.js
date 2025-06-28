@@ -4,7 +4,18 @@ let handler = async (m, { conn, usedPrefix }) => {
 
    // Verifica si el usuario está en la base de datos
    if (!(who in global.db.data.users)) {
-      return conn.reply(m.chat, 'El usuario no se encuentra en mi base de Datos.', m);
+      return conn.sendMessage(m.chat, { text: 'El usuario no se encuentra en mi base de Datos.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
    }
 
    let user = global.db.data.users[who];

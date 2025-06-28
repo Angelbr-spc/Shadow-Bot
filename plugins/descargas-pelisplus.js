@@ -11,7 +11,18 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
         
         // Verificar si la solicitud fue exitosa
         if (!response.data.status) {
-            return conn.reply(m.chat, 'No se encontraron resultados para su búsqueda.', m);
+            return conn.sendMessage(m.chat, { text: 'No se encontraron resultados para su búsqueda.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
         }
         
         let peliculas = response.data.peliculas;

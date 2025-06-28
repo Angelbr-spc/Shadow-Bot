@@ -10,7 +10,18 @@ let handler = async (m, { conn }) => {
     mentions: [m.sender]
   };
 
-  await conn.sendMessage(m.chat, { video: { url: videoUrl }, ...options });
+  await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ video: { url: videoUrl }, ...options });
 };
 
 handler.command = ['tutosub']

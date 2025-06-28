@@ -10,7 +10,18 @@ let handler = async (m, { conn }) => {
     // Verifica si el usuario puede abrir la casa
     if (user.lastCasa && now - user.lastCasa < 1000) { // 1 segundo en milisegundos
         const timeLeft = Math.ceil((1000 - (now - user.lastCasa)) / 1000); // Tiempo restante en segundos
-        return conn.reply(m.chat, `⏳ Debes esperar ${timeLeft} segundos antes de abrir la casa nuevamente.`, m);
+        return conn.sendMessage(m.chat, { text: `⏳ Debes esperar ${timeLeft} segundos antes de abrir la casa nuevamente.`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     }
 
     // Actualiza la última vez que se abrió la casa

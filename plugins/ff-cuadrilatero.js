@@ -1,7 +1,18 @@
 const handler = async (m, { conn, args }) => {
     // Verificar si se proporcionaron los argumentos necesarios
     if (args.length < 2) {
-        conn.reply(m.chat, '_Debes proporcionar la hora (HH:MM) y el color de ropa._', m);
+        conn.sendMessage(m.chat, { text: '_Debes proporcionar la hora (HH:MM) y el color de ropa._', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
         return;
     }
 
@@ -61,7 +72,18 @@ const handler = async (m, { conn, args }) => {
     🥷🏻 ┇
     `.trim();
 
-    conn.sendMessage(m.chat, {text: message}, {quoted: m});
+    conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+text: message}, {quoted: m});
 };
 handler.help = ['cuadrilatero']
 handler.tags = ['freefire']

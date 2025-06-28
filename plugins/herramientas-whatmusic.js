@@ -10,7 +10,18 @@ let handler = async (m) => {
 let q = m.quoted ? m.quoted : m
 let mime = (q.msg || q).mimetype || ''
 if (/audio|video/.test(mime)) { if ((q.msg || q).seconds > 20) return m.reply('╰⊱⚠️⊱ *𝘼𝘿𝙑𝙀𝙍𝙏𝙀𝙉𝘾𝙄𝘼 | 𝙒𝘼𝙍𝙉𝙄𝙉𝙂* ⊱⚠️⊱╮\n\nEl archivo que carga es demasiado grande, le sugerimos que corte el archivo grande a un archivo más pequeño, 10-20 segundos Los datos de audio son suficientes para identificar')
-await conn.reply(m.chat, wait, m)
+await conn.sendMessage(m.chat, { text: wait, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
 let media = await q.download()
 let ext = mime.split('/')[1]
 fs.writeFileSync(`./tmp/${m.sender}.${ext}`, media)

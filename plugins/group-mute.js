@@ -1,7 +1,18 @@
 let mutedUsers = new Set();
 
 let handler = async (m, { conn, usedPrefix, command, isAdmin, isBotAdmin }) => {
-    if (!isBotAdmin) return conn.reply(m.chat, '⭐ El bot necesita ser administrador.', m);
+    if (!isBotAdmin) return conn.sendMessage(m.chat, { text: '⭐ El bot necesita ser administrador.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     if (!isAdmin) return conn.reply(m.chat, '⭐ Solo los administradores pueden usar este comando.', m);
 
     let user;
@@ -23,7 +34,18 @@ let handler = async (m, { conn, usedPrefix, command, isAdmin, isBotAdmin }) => {
 handler.before = async (m, { conn }) => {
     if (mutedUsers.has(m.sender) && m.mtype !== 'stickerMessage') {
         try {
-            await conn.sendMessage(m.chat, { delete: m.key });
+            await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ delete: m.key });
         } catch (e) {
             console.error(e);
         }

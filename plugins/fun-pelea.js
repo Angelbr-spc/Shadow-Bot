@@ -18,7 +18,18 @@ let handler = async (m, {
 
     let duracionPelea = getRandom(1, 10)
     let msg = `*Tú* (nivel ${global.db.data.users[m.sender].level}) desafías a *${conn.getName(oponente)}* (nivel ${global.db.data.users[oponente].level}) y están en medio de una pelea intensa.\n\nEspera ${duracionPelea} minutos más y veremos quién gana.`
-    conn.sendMessage(m.chat, { image: { url: peleando }, caption: msg }, { quoted: m })
+    conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ image: { url: peleando }, caption: msg }, { quoted: m })
 
     conn.fight[m.sender] = true
 

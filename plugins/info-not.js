@@ -17,7 +17,18 @@ let noAceptarHandler = async (m, { conn, text, usedPrefix, command }) => {
   let userId = match[1] + "@s.whatsapp.net"
 
 
-  await conn.reply(userId, `❌ *Tu sugerencia fue RECHAZADA*\n\n_El staff ha revisado tu propuesta y decidió no implementarla._\nRazón: ${razon}`, m)
+  await conn.sendMessage(userId, { text: `❌ *Tu sugerencia fue RECHAZADA*\n\n_El staff ha revisado tu propuesta y decidió no implementarla._\nRazón: ${razon}`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
   m.reply(`❌ Sugerencia rechazada y notificada al usuario.`)
 }
 noAceptarHandler.help = ['noaceptar']

@@ -6,13 +6,30 @@ const handler = async (m, {conn, text, participants, isOwner, isAdmin}) => {
     const users = participants.map((u) => conn.decodeJid(u.id));
     const q = m.quoted ? m.quoted : m || m.text || m.sender;
     const c = m.quoted ? await m.getQuotedObj() : m.msg || m.text || m.sender;
+
+    const content = {
+      [m.quoted ? q.mtype : 'extendedTextMessage']: m.quoted
+        ? {
+            ...c.message[q.mtype],
+            contextInfo: {
+              ...(c.message[q.mtype]?.contextInfo || {}),
+              mentionedJid: users
+            }
+          }
+        : {
+            text: '' || c,
+            contextInfo: {
+              mentionedJid: users
+            }
+          }
+    };
+
     const msg = conn.cMod(
       m.chat,
-      generateWAMessageFromContent(
-        m.chat,
-        {[m.quoted ? q.mtype : 'extendedTextMessage']: m.quoted ? c.message[q.mtype] : {text: '' || c}},
-        {quoted: m, userJid: conn.user.id}
-      ),
+      generateWAMessageFromContent(m.chat, content, {
+        quoted: m,
+        userJid: conn.user.id
+      }),
       text || q.text,
       conn.user.jid,
       {mentions: users}
@@ -25,13 +42,24 @@ const handler = async (m, {conn, text, participants, isOwner, isAdmin}) => {
     const isMedia = /image|video|sticker|audio/.test(mime);
     const more = String.fromCharCode(8206);
     const masss = more.repeat(850);
-    const htextos = `${text ? text : ''}`; // Texto personalizado o vacío.
+    const htextos = `${text ? text : ''}`;
 
     if ((isMedia && quoted.mtype === 'imageMessage') && htextos) {
       var mediax = await quoted.download?.();
       conn.sendMessage(
         m.chat,
-        {image: mediax, mentions: users, caption: htextos},
+        {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+image: mediax, mentions: users, caption: htextos},
         {quoted: m}
       );
     } else if ((isMedia && quoted.mtype === 'videoMessage') && htextos) {
@@ -61,13 +89,11 @@ const handler = async (m, {conn, text, participants, isOwner, isAdmin}) => {
         {
           extendedTextMessage: {
             text: `${masss}\n${htextos}\n`,
-            ...{
-              contextInfo: {
-                mentionedJid: users,
-                externalAdReply: {
-                  thumbnail: 'https://telegra.ph/file/03d1e7fc24e1a72c60714.jpg',
-                  sourceUrl: global.canal
-                }
+            contextInfo: {
+              mentionedJid: users,
+              externalAdReply: {
+                thumbnail: 'https://telegra.ph/file/03d1e7fc24e1a72c60714.jpg',
+                sourceUrl: global.canal
               }
             }
           }

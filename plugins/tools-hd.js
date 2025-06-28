@@ -17,7 +17,18 @@ const handler = async (m, { conn }) => {
       return m.reply('🪐 Responde a una imagen JPG o PNG.')
     }
 
-    await conn.sendMessage(m.chat, { text: `⏳ Mejorando Su Imagen Espere Un Momento.\n> ${dev}` }, { quoted: m })
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: `⏳ Mejorando Su Imagen Espere Un Momento.\n> ${dev}` }, { quoted: m })
 
     const buffer = await q.download()
     const image = await Jimp.read(buffer)
@@ -34,7 +45,18 @@ const handler = async (m, { conn }) => {
     await conn.sendMessage(m.chat, { text: "✅ Imagen mejorada." }, { quoted: m })
 
   } catch (err) {
-    conn.reply(m.chat, `*Error:* ${err.message}\n > 🕊️.`, m)
+    conn.sendMessage(m.chat, { text: `*Error:* ${err.message}\n > 🕊️.`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
   }
 }
 

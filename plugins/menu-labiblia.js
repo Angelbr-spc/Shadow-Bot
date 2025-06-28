@@ -14,7 +14,18 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
     let json = await res.json();
 
     if (!json.success) {
-      return conn.reply(m.chat, 'No se encontraron resultados para tu búsqueda.', m);
+      return conn.sendMessage(m.chat, { text: 'No se encontraron resultados para tu búsqueda.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     }
 
     let txt = '`乂  B Í B L I A  -  B Ú S Q U E`';

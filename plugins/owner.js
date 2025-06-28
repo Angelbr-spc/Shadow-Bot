@@ -22,7 +22,18 @@ let handler = async (m, _2) => {
     _return = await exec.call(conn, (...args) => {
       if (--i < 1) return
       console.log(...args)
-      return conn.reply(m.chat, format(...args), m)
+      return conn.sendMessage(m.chat, { text: format(...args), 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
     }, m, handler, require, conn, CustomArray, process, args, groupMetadata, f, f.exports, [conn, _2])
   } catch (e) {
     let err = syntaxerror(_text, 'Función de ejecución', {

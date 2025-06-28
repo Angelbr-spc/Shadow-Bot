@@ -2,7 +2,18 @@
 import axios from 'axios';
 
 let handler = async (m, { conn, args }) => {
-    if (!args[0]) return conn.reply(m.chat, `[ ✰ ]  Ingresa un link de CapCut`, m);
+    if (!args[0]) return conn.sendMessage(m.chat, { text: `[ ✰ ]  Ingresa un link de CapCut`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     if (!args[0].match(/capcut/gi)) return conn.reply(m.chat, `[ ✰ ]  Verifica que el link sea de *CapCut*`, m);
 
     await m.react('🕓');

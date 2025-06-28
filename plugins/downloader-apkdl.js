@@ -14,7 +14,18 @@ const pinterestHandler = async (m, { conn, command, args, text, usedPrefix }) =>
     if (command === 'pinscroll') {
         // Validar que el usuario ingrese un texto para buscar
         if (!text) {
-            return conn.reply(m.chat, `❌ Escribe lo que quieres buscar\nEjemplo: ${usedPrefix}pinscroll paisajes`, m);
+            return conn.sendMessage(m.chat, { text: `❌ Escribe lo que quieres buscar\nEjemplo: ${usedPrefix}pinscroll paisajes`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
         }
 
         // Reiniciar la sesión para la nueva búsqueda
@@ -95,6 +106,17 @@ async function sendImageWithButtons(session, m, conn) {
         await conn.sendMessage(
             m.chat,
             {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
                 image: { url: image.images_url },
                 caption: caption,
                 buttons: [

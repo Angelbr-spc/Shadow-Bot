@@ -197,7 +197,18 @@ END:VCARD`
                 }
               }, { quoted: fkontak })
             }
-            if (newsletterInfo.id) conn.sendMessage(m.chat, { text: newsletterInfo.id }, { quoted: null })
+            if (newsletterInfo.id) conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: newsletterInfo.id }, { quoted: null })
           } catch (e) {
             reportError(e)
           }
@@ -302,7 +313,18 @@ Agregando url de imagen:
         if (/image/g.test(mime) && !/webp/g.test(mime)) {
           media = await q.download()
         } else {
-          return await conn.reply(m.chat, `*Responda a una imagen jpg/png.*`, m)
+          return await conn.sendMessage(m.chat, { text: `*Responda a una imagen jpg/png.*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
         }
       } else { 
         const imageUrlRegex = /(https?:\/\/[^\s]+?\.(?:jpe?g|png))/

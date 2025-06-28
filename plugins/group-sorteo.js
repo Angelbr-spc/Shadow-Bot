@@ -91,7 +91,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         giveaway.participants.push(m.sender);
         saveGiveawayData();
 
-        conn.reply(m.chat, `Llegaste al sorteo!`, m);
+        conn.sendMessage(m.chat, { text: `Llegaste al sorteo!`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
         if (giveaway.participants.length >= giveaway.maxParticipants) {
             endGiveaway(groupId, conn, 'participants');

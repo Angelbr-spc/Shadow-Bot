@@ -1,10 +1,32 @@
 import fetch from 'node-fetch' 
 import axios from "axios"
 const handler = async (m, {conn, text, args, usedPrefix, isPrems}) => {   
-if (!args[0]) return conn.reply(m.chat, '*Por favor ingresa una url de la página a la que se le tomará captura 🔎*', m)  
+if (!args[0]) return conn.sendMessage(m.chat, { text: '*Por favor ingresa una url de la página a la que se le tomará captura 🔎*', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })  
 let user = global.db.data.users[m.sender]
 try{
-     await conn.sendMessage(m.chat, { image: { url: `https://image.thum.io/get/fullpage/${args[0]}` }, caption: `Tu imagen 📷` }, { quoted: m })
+     await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ image: { url: `https://image.thum.io/get/fullpage/${args[0]}` }, caption: `Tu imagen 📷` }, { quoted: m })
 }
 catch{
 try {

@@ -9,7 +9,18 @@ if (user.genre) {
 return conn.reply(m.chat, `❀ Ya tienes un género establecido, si quieres borrar el género actual usa:\n> » ${usedPrefix}delgenre`, m);
 }
 
-if (!text) return conn.reply(m.chat, `❀ Debes ingresar un género válido.\n> Ejemplo » *${usedPrefix + command} hombre*`, m);
+if (!text) return conn.sendMessage(m.chat, { text: `❀ Debes ingresar un género válido.\n> Ejemplo » *${usedPrefix + command} hombre*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
 function asignarGenre(text) {
 let genre;

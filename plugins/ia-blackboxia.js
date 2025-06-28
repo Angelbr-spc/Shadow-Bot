@@ -3,13 +3,35 @@ import fetch from 'node-fetch';
 const handler = async (m, { conn, args, usedPrefix, command }) => {
     try {
         if (!args.length) {
-            return await conn.reply(m.chat, `❌ Debes proporcionar una pregunta.\n\nEjemplo: *${usedPrefix + command} ¿Cuál es el origen del universo?*`, m);
+            return await conn.sendMessage(m.chat, { text: `❌ Debes proporcionar una pregunta.\n\nEjemplo: *${usedPrefix + command} ¿Cuál es el origen del universo?*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
         }
 
         const query = encodeURIComponent(args.join(" "));
         const apiUrl = `https://api.siputzx.my.id/api/ai/blackboxai-pro?content=${query}`;
 
-        await conn.sendMessage(m.chat, { react: { text: '🤖', key: m.key } });
+        await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ react: { text: '🤖', key: m.key } });
 
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 10000); // 10 segundos

@@ -36,7 +36,18 @@ const handler = async (m, { conn}) => {
         resultado: casoSeleccionado.resultado
 };
 
-    await conn.sendMessage(m.chat, { text: mensaje});
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: mensaje});
 };
 
 handler.before = async (m, { conn}) => {
@@ -46,7 +57,18 @@ handler.before = async (m, { conn}) => {
 
         if (respuesta>= 1 && respuesta <= resultado.length) {
             delete conn.detectiveGame[m.chat];
-            return conn.reply(m.chat, resultado[respuesta - 1], m);
+            return conn.sendMessage(m.chat, { text: resultado[respuesta - 1], 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 } else {
             return conn.reply(m.chat, `❌ *Opción no válida. Intenta con un número entre 1 y ${resultado.length}.*`, m);
 }

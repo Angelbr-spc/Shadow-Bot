@@ -20,7 +20,18 @@ const handler = async (m, { conn}) => {
     conn.dessertBattleGame = conn.dessertBattleGame || {};
     conn.dessertBattleGame[m.chat] = {};
 
-    await conn.sendMessage(m.chat, { text: mensaje});
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: mensaje});
 };
 
 handler.before = async (m, { conn}) => {
@@ -36,7 +47,18 @@ handler.before = async (m, { conn}) => {
             const usuario = conn.getName(m.sender);
             conn.dessertBattleGame[m.chat] = { nombre: usuario, postre: postreSeleccionado};
 
-            await conn.reply(m.chat, `✅ *${usuario} ha elegido:* ${postreSeleccionado}\n⌛ Preparándose para la competencia...`, m);
+            await conn.sendMessage(m.chat, { text: `✅ *${usuario} ha elegido:* ${postreSeleccionado}\n⌛ Preparándose para la competencia...`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
             setTimeout(() => {
                 const resultado = [

@@ -35,7 +35,18 @@ let handler = async (m, {text, usedPrefix, command, conn}) => {
 *🔥 𝐁𝐨𝐭 𝐒𝐡𝐚𝐝𝐨𝐰*`;
 
   // Enviando el mensaje
-  await conn.sendMessage(m.chat, {image: {url: x.Poster}, caption: mov_txt, mentions: [m.sender]}, {quoted: m});
+  await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+image: {url: x.Poster}, caption: mov_txt, mentions: [m.sender]}, {quoted: m});
 };
 
 handler.command = /^(película|pelicula|peli)$/i;

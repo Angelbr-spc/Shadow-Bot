@@ -12,7 +12,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     if (!json.data) {
       await m.react('✖️');
-      return await conn.reply(m.chat, '❌ No se encontraron resultados para esta búsqueda.', m);
+      return await conn.sendMessage(m.chat, { text: '❌ No se encontraron resultados para esta búsqueda.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     }
 
     const user = json.data;
@@ -25,7 +36,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     txt += `📝 *Publicaciones:* ${user.posts}\n`;
     txt += `🔗 *Perfil:* ${user.url}\n\n`;
 
-    await conn.sendMessage(m.chat, { image: { url: user.profile_picture }, caption: txt }, { quoted: m });
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ image: { url: user.profile_picture }, caption: txt }, { quoted: m });
     await m.react('✅');
   } catch (error) {
     console.error(error);

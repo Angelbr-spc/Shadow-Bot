@@ -32,12 +32,34 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
           txt += `    ✩  *Descargas* : ${video.download_count}\n\n`;
           txt += `> 🚩 Enlace al video: ${video.play}`;
 
-          await conn.sendMessage(m.chat, { video: { url: video.play }, caption: txt }, { quoted: m });
+          await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ video: { url: video.play }, caption: txt }, { quoted: m });
         }
         await m.react('✅');
       } else {
         await m.react('✖️');
-        await conn.reply(m.chat, 'No se encontraron videos para este usuario.', m);
+        await conn.sendMessage(m.chat, { text: 'No se encontraron videos para este usuario.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
       }
     } else {
       await m.react('✖️');

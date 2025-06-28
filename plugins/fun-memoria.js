@@ -16,7 +16,18 @@ const handler = async (m, { conn}) => {
         secuencia,
         timeout: setTimeout(() => {
             if (conn.memoriaGame[m.chat]) {
-                conn.reply(m.chat, `⏳ *Tiempo agotado!* La secuencia era: *${secuencia}*`, m);
+                conn.sendMessage(m.chat, { text: `⏳ *Tiempo agotado!* La secuencia era: *${secuencia}*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
                 delete conn.memoriaGame[m.chat];
 }
 }, timeout),

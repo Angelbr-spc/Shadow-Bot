@@ -41,7 +41,18 @@ let handler = async (m, { conn, usedPrefix }) => {
         let mentions = [who]; // Si hay mención, se incluye el ID de la persona mencionada
 
         // Convertimos la URL del video a un sticker
-        await conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m, sendMediaAsSticker: true });
+        await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m, sendMediaAsSticker: true });
     }
 }
 

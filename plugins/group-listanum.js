@@ -14,7 +14,18 @@ const handler = async (m, {conn, args, groupMetadata, participants, usedPrefix, 
     case 'kicknum':
       if (!bot.restrict) return m.reply('*¡Este Comando Esta Desabilitado Por El Propietario Del Bot!*');
       if (!isBotAdmin) return m.reply('*¡🤍 El Bot No Es Admin!*');
-      conn.reply(m.chat, `*⏰️ Espere Iniciando La Eliminación*`, m);
+      conn.sendMessage(m.chat, { text: `*⏰️ Espere Iniciando La Eliminación*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
       const ownerGroup = m.chat.split`-`[0] + '@s.whatsapp.net';
       const users = participants.map((u) => u.id).filter((v) => v !== conn.user.jid && v.startsWith(lol || lol));
       for (const user of users) {

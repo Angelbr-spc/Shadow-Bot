@@ -27,7 +27,18 @@ let givecharHandler = async (m, { conn, args }) => {
 
     // Verifica que se proporcionen suficientes argumentos
     if (args.length < 2) {
-        await conn.reply(m.chat, '《✧》Debes especificar el nombre del personaje y mencionar a quien quieras regalarlo.', m);
+        await conn.sendMessage(m.chat, { text: '《✧》Debes especificar el nombre del personaje y mencionar a quien quieras regalarlo.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
         return;
     }
 

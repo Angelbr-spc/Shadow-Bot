@@ -18,7 +18,18 @@ const handler = async (m, { conn, args }) => {
     const data = await response.json();
 
     if (!data || !data.result) {
-      return conn.reply(m.chat, '❌ No se encontró información sobre el código proporcionado.', m);
+      return conn.sendMessage(m.chat, { text: '❌ No se encontró información sobre el código proporcionado.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     }
 
     const { country, prefix, continent, currency, capital } = data.result;

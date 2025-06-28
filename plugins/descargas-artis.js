@@ -142,7 +142,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   // Si ya hay una descarga en curso, se responde con un mensaje enojado
   if (isDownloadingArtist) {
-    return conn.sendMessage(m.chat, { text: "⚠️ ¡Ya hay una descarga en curso! No interrumpas el proceso." });
+    return conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: "⚠️ ¡Ya hay una descarga en curso! No interrumpas el proceso." });
   }
   
   // Validar que se haya proporcionado el nombre del artista

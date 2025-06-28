@@ -2,7 +2,18 @@ import axios from 'axios';
 
 const handler = async (m, { conn, args, usedPrefix, command}) => {
   if (!args[0]) {
-    return conn.reply(m.chat, `❌ *Uso incorrecto:*\n${usedPrefix + command} <término de búsqueda>\n\nEjemplo:\n${usedPrefix + command} miku kawaii`, m);
+    return conn.sendMessage(m.chat, { text: `❌ *Uso incorrecto:*\n${usedPrefix + command} <término de búsqueda>\n\nEjemplo:\n${usedPrefix + command} miku kawaii`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 }
 
   const query = encodeURIComponent(args.join(" "));
@@ -31,6 +42,17 @@ const handler = async (m, { conn, args, usedPrefix, command}) => {
 
     for (let i = 0; i < randomImages.length; i++) {
       await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
         image: { url: randomImages[i]},
         caption: `📌 *Resultado ${i + 1}/5 para:* _${args.join(" ")}_`,
 }, { quoted: m});

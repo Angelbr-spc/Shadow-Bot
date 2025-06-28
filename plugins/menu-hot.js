@@ -44,7 +44,18 @@ let handler = async (m, { conn }) => {
 `.trim();
 
         // Enviar solo el texto del menú
-        await conn.sendMessage(m.chat, { text: menu, mentions: [m.sender] });
+        await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: menu, mentions: [m.sender] });
     } catch (e) {
         await m.reply(`⚠ Error al ejecutar el comando. Intenta nuevamente o reporta este problema.\n\nDetalles del error:\n${e.message}`);
         console.error(e);

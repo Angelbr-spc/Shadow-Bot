@@ -9,7 +9,18 @@ export const handler = async (m, { conn, args, usedPrefix, command }) => {
   }
 
   // Reacción de inicio
-  await conn.sendMessage(m.chat, { react: { text: '🔵', key: m.key } })
+  await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ react: { text: '🔵', key: m.key } })
 
   try {
     const url = `https://api.siputzx.my.id/api/tools/ttsgoogle?text=${encodeURIComponent(texto)}`
@@ -35,7 +46,18 @@ export const handler = async (m, { conn, args, usedPrefix, command }) => {
   } catch (e) {
     console.error(e)
     await conn.sendMessage(m.chat, { react: { text: '🔴', key: m.key } })
-    conn.reply(m.chat, '🔴 Ocurrió un error al generar el audio.', m)
+    conn.sendMessage(m.chat, { text: '🔴 Ocurrió un error al generar el audio.', 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
   }
 }
 

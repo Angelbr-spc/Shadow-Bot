@@ -55,7 +55,18 @@ title: "S P O T I F Y - A U D I O",
 await conn.reply(m.chat, captvid, m, infoReply)
 infoReply.contextInfo.externalAdReply.body = "Audio descargado con éxito" // Para confirmar la descarga Jjjj
 
-await conn.sendMessage(m.chat, { audio: { url: downloadUrl }, caption: captvid, mimetype: "audio/mpeg", contextInfo: infoReply.contextInfo, }, { quoted: m }
+await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ audio: { url: downloadUrl }, caption: captvid, mimetype: "audio/mpeg", contextInfo: infoReply.contextInfo, }, { quoted: m }
 )} catch (error) {
 console.error("Error en el handler de Spotify:", error)
 return m.reply("✦ Ocurrió un error al procesar tu solicitud. Inténtalo de nuevo más tarde.")

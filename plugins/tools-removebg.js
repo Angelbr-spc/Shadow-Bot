@@ -2,7 +2,18 @@ import fetch from 'node-fetch';
 const handler = async (m, {conn, text, usedPrefix, command}) => {
 if (!text) throw `*🧑‍💻 ingrese la URL de la imagen.*`;
 m.react('🕒');
-await conn.sendMessage(m.chat, {text: '*🧑‍💻 Eliminando, Espere Un Momento...*'}, {quoted: m});
+await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+text: '*🧑‍💻 Eliminando, Espere Un Momento...*'}, {quoted: m});
 try {
 const formData = new FormData();
 formData.append("size", "auto");

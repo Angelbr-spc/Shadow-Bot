@@ -32,6 +32,17 @@ Selecciona tu jugada presionando un botón:
         await conn.sendMessage(
             m.chat,
             {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
                 text: caption,
                 buttons: buttons,
                 viewOnce: true
@@ -42,7 +53,18 @@ Selecciona tu jugada presionando un botón:
     }
 
     if (!activeGames.get(m.chat)) {
-        return conn.reply(m.chat, `⚠️ Primero activa el juego con *${usedPrefix}game*`, m);
+        return conn.sendMessage(m.chat, { text: `⚠️ Primero activa el juego con *${usedPrefix}game*`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
     }
 
     let choices = ['piedra', 'papel', 'tijera'];

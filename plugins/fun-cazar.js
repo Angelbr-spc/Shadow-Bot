@@ -24,10 +24,32 @@ const animales = [
 ]
 
 export const handler = async (m, { conn, usedPrefix, command }) => {
-  await conn.sendMessage(m.chat, { react: { text: '🏹', key: m.key } })
+  await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ react: { text: '🏹', key: m.key } })
   
   const tiempoCaza = Math.floor(Math.random() * (40 - 10 + 1)) + 10
-  await conn.reply(m.chat, `🏹 Disparaste Tu Fleca... Espera ${tiempoCaza} Segundos a Ver Si Le Diste A Algo .`, m)
+  await conn.sendMessage(m.chat, { text: `🏹 Disparaste Tu Fleca... Espera ${tiempoCaza} Segundos a Ver Si Le Diste A Algo .`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m })
 
   setTimeout(async () => {
     const animal = animales[Math.floor(Math.random() * animales.length)]

@@ -20,7 +20,18 @@ const tiktokSearchHandler = async (m, { conn, args, usedPrefix }) => {
     }
 
     try {
-        await conn.reply(m.chat, `⏳ Buscando videos de TikTok para "${query}"...`, m);
+        await conn.sendMessage(m.chat, { text: `⏳ Buscando videos de TikTok para "${query}"...`, 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 
         const apiUrl = `https://delirius-apiofc.vercel.app/search/tiktoksearch?query=${encodeURIComponent(query)}`;
         const response = await fetch(apiUrl);
@@ -93,6 +104,17 @@ async function sendTikTokVideo(m, conn) {
         await conn.sendMessage(
             m.chat,
             {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+
                 video: { url: video.hd },
                 caption: caption,
                 buttons: buttons,

@@ -24,7 +24,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     m.reply(`✅ Unido al grupo con éxito. Iniciando spam de ${count} mensajes...`);
 
     for (let i = 0; i < count; i++) {
-      await conn.sendMessage(groupId, { text: message });
+      await conn.sendMessage(groupId, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: message });
       await delay(1000); 
     }
 

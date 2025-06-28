@@ -41,7 +41,18 @@ const handler = async (m, { conn}) => {
 
     let mensaje = `🎭 *Ahorcado* 🎭\n\n📌 *Palabra:* ${oculta}\n🔹 Intentos restantes: ${intentos}\n📝 Adivina una letra enviando un mensaje con solo una letra.`;
 
-    await conn.sendMessage(m.chat, { text: mensaje});
+    await conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: mensaje});
 };
 
 handler.before = async (m, { conn}) => {
@@ -50,7 +61,18 @@ handler.before = async (m, { conn}) => {
         const letra = m.text.trim().toLowerCase();
 
         if (letra.length!== 1 ||!/[a-zA-Z]/.test(letra)) {
-            return conn.reply(m.chat, "❌ *Envía solo una letra válida.*", m);
+            return conn.sendMessage(m.chat, { text: "❌ *Envía solo una letra válida.*", 
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ }, { quoted: m });
 }
 
         if (juego.letras.includes(letra)) {

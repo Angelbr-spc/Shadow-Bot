@@ -2,7 +2,18 @@
 const handler = async (m, { conn, args }) => {
     // Verificamos si se han proporcionado argumentos
     if (!args[0] || !args[1]) {
-        return conn.sendMessage(m.chat, { text: "Por favor, usa el formato correcto: .quitardulces <cantidad> @usuario" }, { quoted: m });
+        return conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ text: "Por favor, usa el formato correcto: .quitardulces <cantidad> @usuario" }, { quoted: m });
     }
 
     const cantidad = parseInt(args[0]); // Convertimos la cantidad a número

@@ -15,7 +15,18 @@ let park = `*Información De:* ${text}\n\n*Nombre Oficial:* ${datas.officialName
 
 let img = datas.image;
 
-conn.sendMessage(m.chat, { image: { url: img }, caption: park }, { quoted: fkontak });
+conn.sendMessage(m.chat, {
+contextInfo: {
+  externalAdReply: {
+    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+    mediaType: 1,
+    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+    renderLargerThumbnail: false,
+    sourceUrl: ''
+  }
+},
+ image: { url: img }, caption: park }, { quoted: fkontak });
 
 } catch (e) {
 m.reply(`*Error:* ${e.message}`);
