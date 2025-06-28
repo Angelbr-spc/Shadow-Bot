@@ -1,10 +1,9 @@
 let handler = async (m, { conn, usedPrefix, command }) => {
   const img = 'https://qu.ax/tNPfx.jpg';
   const name = await conn.getName(m.sender);
-  const text = `🪙 𝐌 𝐔 𝐋 𝐓 𝐈 - 𝐌 𝐄 𝐍 𝐔́ 
+  const text = `🪙 𝐌 𝐔 𝐋 𝐓 𝐈 - 𝐌 𝐄 𝐍 U
 
 
- 
 
   「 *📚 𝘐𝘯𝘧𝘰 📚* 」
 ┣━━━━━━━━━━━━━━┫
@@ -364,18 +363,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 
 `.trim();
 
-  await conn.sendMessage(m.chat, {
-contextInfo: {
-  externalAdReply: {
-    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
-    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
-    mediaType: 1,
-    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
-    renderLargerThumbnail: false,
-    sourceUrl: ''
-  }
-},
- image: { url: img }, caption: text }, { quoted: m });
+  await conn.sendMessage(m.chat, { image: { url: img }, caption: text }, { quoted: m });
 };
 
 handler.customPrefix = /^(menu|menú|ayuda|help)$/i;
