@@ -16,7 +16,7 @@ let handler = async (m, { conn, usedPrefix, text }) => {
           title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
           body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
           mediaType: 1,
-          thumbnailUrl: 'https://qu.ax/tNPfx.jpg', // Puedes cambiar la imagen
+          thumbnailUrl: 'https://files.catbox.moe/iqwgyr.jpg', // Puedes cambiar la imagen
           renderLargerThumbnail: false, // IMPORTANTE: esto lo deja chiquito
           sourceUrl: '' // Cambia si quieres que se abra algo
         }
