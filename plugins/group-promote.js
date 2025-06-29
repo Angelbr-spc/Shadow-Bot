@@ -13,8 +13,8 @@ let handler = async (m, { conn, usedPrefix, text }) => {
       text: `📌 *Ejemplo:*\n│ .promote @usuario`,
       contextInfo: {
         externalAdReply: {
-          title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
-          body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
+          title: '𝐀𝐧𝐠𝐞𝐥 𝐁𝐨𝐭 𝐃𝐞𝐥𝐚𝐲 🎭',
+          body: '𝐀𝐧𝐠𝐞𝐥 𝐁𝐨𝐭 𝐃𝐞𝐥𝐚𝐲 🎭',
           mediaType: 1,
           thumbnailUrl: 'https://files.catbox.moe/103kf9.jpg', // Puedes cambiar la imagen
           renderLargerThumbnail: false, // IMPORTANTE: esto lo deja chiquito
