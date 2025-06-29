@@ -11,34 +11,10 @@ let handler = async (m, { conn, usedPrefix, text }) => {
   if (!text && !m.quoted) {
     return conn.sendMessage(m.chat, {
       text: `📌 *Ejemplo:*\n│ .promote @usuario`,
-      contextInfo: {
-        externalAdReply: {
-          title: '𝐀𝐧𝐠𝐞𝐥 𝐁𝐨𝐭 𝐃𝐞𝐥𝐚𝐲 ',
-          body: '𝐀𝐧𝐠𝐞𝐥 𝐁𝐨𝐭 𝐃𝐞𝐥𝐚𝐲 ',
-          mediaType: 1,
-          thumbnailUrl: 'https://files.catbox.moe/103kf9.jpg', // Puedes cambiar la imagen
-          renderLargerThumbnail: false, // IMPORTANTE: esto lo deja chiquito
-          sourceUrl: '' // Cambia si quieres que se abra algo
-        }
-      }
-    }, { quoted: m });
-  }
 
   if (number.length > 13 || (number.length < 11 && number.length > 0)) {
     return conn.sendMessage(m.chat, {
       text: `_ᩭ✎ El número ingresado es incorrecto, por favor revise el formato_`,
-      contextInfo: {
-        externalAdReply: {
-          title: '⚠️ RengelDev c++ ⚠️',
-          body: '❌ Número inválido',
-          mediaType: 1,
-          thumbnailUrl: 'https://telegra.ph/file/64da2cfa930f40c91d322.jpg',
-          renderLargerThumbnail: false,
-          sourceUrl: 'https://wa.me/0'
-        }
-      }
-    }, { quoted: m });
-  }
 
   try {
     let user;
@@ -65,16 +41,7 @@ contextInfo: {
 },
 
       text: `✅ *@${user.split('@')[0]} ha sido promovido a administrador*`,
-      contextInfo: {
-        externalAdReply: {
-          title: '⚠️ RengelDev c++ ⚠️',
-          body: '🎖 Promoción realizada con éxito',
-          mediaType: 1,
-          thumbnailUrl: 'https://telegra.ph/file/64da2cfa930f40c91d322.jpg',
-          renderLargerThumbnail: false,
-          sourceUrl: 'https://wa.me/0'
-        }
-      }
+
     }, { quoted: m, mentions: [user] });
 
   } catch (e) {
