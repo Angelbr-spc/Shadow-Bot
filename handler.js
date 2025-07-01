@@ -477,10 +477,10 @@ global.dfail = (type, m, conn, usedPrefix) => {
         text: msg,
         contextInfo: {
             externalAdReply: {
-                title: '𝐀𝐧𝐠𝐞𝐥 𝐁𝐨𝐭 𝐃𝐞𝐥𝐚𝐲',
-                body: '𝐀𝐧𝐠𝐞𝐥 𝐁𝐨𝐭 𝐃𝐞𝐥𝐚𝐲',
+                title: '𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
+                body: '𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
                 mediaType: 1,
-                thumbnailUrl: 'https://files.catbox.moe/ntyp5r.jpg',
+                thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
                 renderLargerThumbnail: false,
                 sourceUrl: ''
             }
