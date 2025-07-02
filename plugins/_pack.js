@@ -27,7 +27,7 @@ let handler = async (m, { conn }) => {
         sourceUrl: ''
       }
     }
-  });
+  })
 }
 
 handler.command = /^pack$/i;
