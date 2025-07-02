@@ -9,7 +9,7 @@ let handler = async (m, { conn }) => {
   const name = await conn.getName(ownerJid) || 'Alee';
   const about = (await conn.fetchStatus(ownerJid).catch(() => {}))?.status || `𝐒𝐨𝐲 𝐂𝐫𝐢𝐬𝐭𝐢𝐚𝐧, 𝐃𝐮𝐞𝐧̃𝐨 𝐝𝐞𝐥 𝐁𝐨𝐭 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷.`;
   const empresa = '𝐂𝐫𝐢𝐬𝐭𝐢𝐚𝐧 - 𝐒𝐞𝐫𝐯𝐢𝐜𝐢𝐨𝐬 𝐭𝐞𝐜𝐧𝐨𝐥𝐨𝐠𝐢𝐜𝐨𝐬';
-  const instagramUrl = 'https://www.instagram.com/baki_hm66';
+  const instagramUrl = 'https://www.instagram.com/bki_hm66';
 
   const vcard = `
 BEGIN:VCARD
