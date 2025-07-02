@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn }) => {
-  let txt = 'Pack🔥🔥🔥\n> Toca *Siguiente* para ver otro ✨';
+  let txt = 'Pack 🔥🔥🔥\nToca *Siguiente* para ver otro.';
   let img = 'https://delirius-apiofc.vercel.app/nsfw/girls';
 
   await conn.sendMessage(
@@ -9,29 +9,18 @@ let handler = async (m, { conn }) => {
     {
       image: { url: img },
       caption: txt,
-      footer: '🍷 Shadow Bot 🍷',
-      templateButtons: [
+      footer: 'Shadow Bot',
+      buttons: [
         {
-          index: 1,
-          quickReplyButton: {
-            displayText: '👉 Siguiente',
-            id: '.pack'
-          }
+          buttonId: '.pack',
+          buttonText: { displayText: '👉 Siguiente' },
+          type: 1
         }
       ],
-      contextInfo: {
-        externalAdReply: {
-          title: '🍷 Shadow Bot 🍷',
-          body: 'Canal Oficial',
-          mediaType: 1,
-          thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
-          renderLargerThumbnail: false,
-          sourceUrl: ''
-        }
-      }
+      headerType: 4 // 👈🏻 importante para imagen
     },
-    { quoted: m } // 👈🏻 ESTO SÍ EXISTE
-  )
+    { quoted: m }
+  );
 }
 
 handler.command = /^pack$/i;
