@@ -17,11 +17,11 @@ let handler = async (m, { conn }) => {
           type: 1
         }
       ],
-      headerType: 4 // 👈🏻 importante para imagen
+      headerType: 4
     },
-    { quoted: m }
+    { quoted: m } // ✅ esto asegura que conteste al mensaje tocado
   );
-}
+};
 
 handler.command = /^pack$/i;
 export default handler;
