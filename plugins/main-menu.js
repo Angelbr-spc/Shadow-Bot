@@ -1,26 +1,33 @@
-let handler = async (m, { conn }) => {
-  const texto = `✨ *MENÚ PRINCIPAL* ✨
+await conn.sendMessage(
+  m.chat,
+  {
+    text: `✨ *MENÚ PRINCIPAL* ✨
 
 Hola 👋 ${m.sender.split('@')[0]}
-
-Elige una opción 👇`;
-
-  const buttons = [
-    { buttonId: '.info', buttonText: { displayText: '📚 Info' }, type: 1 },
-    { buttonId: '.donar', buttonText: { displayText: '💸 Donar' }, type: 1 },
-    { buttonId: '.owner', buttonText: { displayText: '👑 Owner' }, type: 1 }
-  ];
-
-  const buttonMessage = {
-    text: texto,
+Elige una opción 👇`,
     footer: 'Bot Angel 👑',
-    buttons: buttons,
-    headerType: 1
-  };
-
-  await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
-};
-
-handler.command = /^menu$/i;
-
-export default handler;
+    templateButtons: [
+      {
+        index: 1,
+        quickReplyButton: {
+          displayText: '👑 Owner',
+          id: '.owner'
+        }
+      },
+      {
+        index: 2,
+        quickReplyButton: {
+          displayText: '💸 Donar',
+          id: '.donar'
+        }
+      },
+      {
+        index: 3,
+        quickReplyButton: {
+          displayText: '📚 Info',
+          id: '.info'
+        }
+      }
+    ]
+  }
+)
