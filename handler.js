@@ -270,9 +270,9 @@ if (typeof plugin !== 'function')
 continue
 if ((usedPrefix = (match[0] || '')[0])) {
 let noPrefix = m.text.replace(usedPrefix, '')
-let [command, ...args] = noPrefix.trim().split .filter(v => v)
+let [command, ...args] = noPrefix.trim().split(' ').filter(v => v)
 args = args || []
-let _args = noPrefix.trim().split .slice(1)
+let _args = noPrefix.trim().split(' ').slice(1)
 // Tesis estuvo aquí 🙀
 let text = _args.join 
 command = (command || '').toLowerCase()
