@@ -7,29 +7,12 @@ let handler = async (m, { conn }) => {
 Hola 👋 ${m.sender.split('@')[0]}
 Elige una opción 👇`,
       footer: 'Bot Angel 👑',
-      templateButtons: [
-        {
-          index: 1,
-          quickReplyButton: {
-            displayText: '📚 Info',
-            id: '.info'
-          }
-        },
-        {
-          index: 2,
-          quickReplyButton: {
-            displayText: '💸 Donar',
-            id: '.donar'
-          }
-        },
-        {
-          index: 3,
-          quickReplyButton: {
-            displayText: '👑 Owner',
-            id: '.owner'
-          }
-        }
-      ]
+      buttons: [
+        { buttonId: '.info', buttonText: { displayText: '📚 Info' }, type: 1 },
+        { buttonId: '.donar', buttonText: { displayText: '💸 Donar' }, type: 1 },
+        { buttonId: '.owner', buttonText: { displayText: '👑 Owner' }, type: 1 }
+      ],
+      headerType: 1
     }
   )
 }
