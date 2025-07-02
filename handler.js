@@ -25,8 +25,16 @@ export async function handler(chatUpdate) {
         await global.loadDatabase()
     try {
         m = smsg(this, m) || m
-        if (!m)
-            return
+        if (!m) return
+
+        // ✅ FIX BOTONES
+        if (m.message?.buttonsResponseMessage) {
+          m.text = m.message.buttonsResponseMessage.selectedButtonId || ''
+        }
+        if (m.message?.templateButtonReplyMessage) {
+          m.text = m.message.templateButtonReplyMessage.selectedId || ''
+        }
+
         m.exp = 0
         m.limit = false
         try {
@@ -485,5 +493,4 @@ global.dfail = (type, m, conn, usedPrefix) => {
                 sourceUrl: ''
             }
         }
-    }, { quoted: m }).then(_ => m.react('✖️'))
-}
+    }, { quoted: m }
