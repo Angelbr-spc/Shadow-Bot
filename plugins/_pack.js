@@ -1,34 +1,34 @@
-/* Pack By WillZek 
-- Free Codes Titan
-- https://whatsapp.com/channel/0029ValMlRS6buMFL9d0iQ0S
-- https://github.com/WillZek 
-*/
-
 import fetch from 'node-fetch';
 
-let handler = async(m, { conn, text, usedPrefix, command }) => {
+let handler = async (m, { conn }) => {
+  let txt = 'Pack🔥🔥🔥\n> Toca *Siguiente* para ver otro ✨';
+  let img = 'https://delirius-apiofc.vercel.app/nsfw/girls';
 
-m.react('🕑');
-
-let txt = 'Pack🔥🔥🔥\n> Pon De Nuevo .pack para mirar el siguiente ✨';
-
-let img = 'https://delirius-apiofc.vercel.app/nsfw/girls';
-
-m.react('✅');
-conn.sendMessage(m.chat, {
-contextInfo: {
-  externalAdReply: {
-    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
-    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
-    mediaType: 1,
-    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
-    renderLargerThumbnail: false,
-    sourceUrl: ''
-  }
-},
- image: { url: img }, caption: txt }, { quoted: fkontak });
+  await conn.sendMessage(m.chat, {
+    image: { url: img },
+    caption: txt,
+    footer: '🍷 Shadow Bot 🍷',
+    templateButtons: [
+      {
+        index: 1,
+        quickReplyButton: {
+          displayText: '👉 Siguiente',
+          id: '.pack'
+        }
+      }
+    ],
+    contextInfo: {
+      externalAdReply: {
+        title: '🍷 Shadow Bot 🍷',
+        body: 'Canal Oficial',
+        mediaType: 1,
+        thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
+        renderLargerThumbnail: false,
+        sourceUrl: ''
+      }
+    }
+  });
 }
 
-handler.command = ['pack'];
-
+handler.command = /^pack$/i;
 export default handler;
