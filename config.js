@@ -11,7 +11,7 @@ import axios from 'axios'
   global.owner = [
   [ '5217227584934', 'Angel', true ],
   [ '5215565238431', 'Cristian', true ],
-  [ '584146277368', 'Willzek', true ],
+  [ '5216674832909', 'Willzek', true ],
   [ '5212431268546', "I'm Fz ~", true ],
   [ '24580450156657', true ],
   [ '573104610726', "MediaHub",true ],
