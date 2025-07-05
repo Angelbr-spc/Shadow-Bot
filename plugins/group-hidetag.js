@@ -1,113 +1,49 @@
-import {generateWAMessageFromContent} from '@whiskeysockets/baileys';
-import * as fs from 'fs';
-
-const handler = async (m, {conn, text, participants, isOwner, isAdmin}) => {
-  try {
-    const users = participants.map((u) => conn.decodeJid(u.id));
-    const q = m.quoted ? m.quoted : m || m.text || m.sender;
-    const c = m.quoted ? await m.getQuotedObj() : m.msg || m.text || m.sender;
-
-    const content = {
-      [m.quoted ? q.mtype : 'extendedTextMessage']: m.quoted
-        ? {
-            ...c.message[q.mtype],
-            contextInfo: {
-              ...(c.message[q.mtype]?.contextInfo || {}),
-              mentionedJid: users
-            }
-          }
-        : {
-            text: '' || c,
-            contextInfo: {
-              mentionedJid: users
-            }
-          }
-    };
-
-    const msg = conn.cMod(
-      m.chat,
-      generateWAMessageFromContent(m.chat, content, {
-        quoted: m,
-        userJid: conn.user.id
-      }),
-      text || q.text,
-      conn.user.jid,
-      {mentions: users}
-    );
-    await conn.relayMessage(m.chat, msg.message, {messageId: msg.key.id});
-  } catch {
-    const users = participants.map((u) => conn.decodeJid(u.id));
-    const quoted = m.quoted ? m.quoted : m;
-    const mime = (quoted.msg || quoted).mimetype || '';
-    const isMedia = /image|video|sticker|audio/.test(mime);
-    const more = String.fromCharCode(8206);
-    const masss = more.repeat(850);
-    const htextos = `${text ? text : ''}`;
-
-    if ((isMedia && quoted.mtype === 'imageMessage') && htextos) {
-      var mediax = await quoted.download?.();
-      conn.sendMessage(
-        m.chat,
-        {
-contextInfo: {
-  externalAdReply: {
-    title: '🍷 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷',
-    body: '🍷 𝑺𝒉𝒂𝒅𝒐𝒘 𝑩𝒐𝒕 🍷',
-    mediaType: 1,
-    thumbnailUrl: 'https://qu.ax/tNPfx.jpg',
-    renderLargerThumbnail: false,
-    sourceUrl: ''
+const handler = async (m, { conn, text, participants, isAdmin, isBotAdmin, isOwner }) => {
+  if (!m.isGroup) {
+    global.dfail('group', m, conn);
+    throw false;
   }
-},
-image: mediax, mentions: users, caption: htextos},
-        {quoted: m}
-      );
-    } else if ((isMedia && quoted.mtype === 'videoMessage') && htextos) {
-      var mediax = await quoted.download?.();
-      conn.sendMessage(
-        m.chat,
-        {video: mediax, mentions: users, mimetype: 'video/mp4', caption: htextos},
-        {quoted: m}
-      );
-    } else if ((isMedia && quoted.mtype === 'audioMessage') && htextos) {
-      var mediax = await quoted.download?.();
-      conn.sendMessage(
-        m.chat,
-        {audio: mediax, mentions: users, mimetype: 'audio/mpeg', fileName: `Hidetag.mp3`},
-        {quoted: m}
-      );
-    } else if ((isMedia && quoted.mtype === 'stickerMessage') && htextos) {
-      var mediax = await quoted.download?.();
-      conn.sendMessage(
-        m.chat,
-        {sticker: mediax, mentions: users},
-        {quoted: m}
-      );
+  if (!isAdmin && !isOwner) {
+    global.dfail('admin', m, conn);
+    throw false;
+  }
+  if (!isBotAdmin) {
+    global.dfail('botAdmin', m, conn);
+    throw false;
+  }
+
+  const users = participants.map(p => p.id);
+  const commandUsed = m.text?.split(' ')[0] || '';
+  const mensaje = text?.replace(new RegExp(`^${commandUsed}`, 'i'), '').trim();
+  const firma = '> 𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷';
+  const fullText = mensaje ? `${mensaje}\n\n${firma}` : firma;
+  const options = { mentions: users, quoted: m };
+
+  if (m.quoted) {
+    const quoted = m.quoted;
+    const mime = (quoted.msg || quoted).mimetype || '';
+    const media = /image|video|sticker|audio/.test(mime) ? await quoted.download() : null;
+
+    if (/image/.test(mime)) {
+      return conn.sendMessage(m.chat, { image: media, caption: fullText, ...options });
+    } else if (/video/.test(mime)) {
+      return conn.sendMessage(m.chat, { video: media, caption: fullText, mimetype: 'video/mp4', ...options });
+    } else if (/audio/.test(mime)) {
+      return conn.sendMessage(m.chat, { audio: media, mimetype: 'audio/mpeg', ptt: true, ...options });
+    } else if (/sticker/.test(mime)) {
+      return conn.sendMessage(m.chat, { sticker: media, ...options });
     } else {
-      await conn.relayMessage(
-        m.chat,
-        {
-          extendedTextMessage: {
-            text: `${masss}\n${htextos}\n`,
-            contextInfo: {
-              mentionedJid: users,
-              externalAdReply: {
-                thumbnail: 'https://telegra.ph/file/03d1e7fc24e1a72c60714.jpg',
-                sourceUrl: global.canal
-              }
-            }
-          }
-        },
-        {}
-      );
+      const citado = quoted.text || quoted.body || fullText;
+      return conn.sendMessage(m.chat, { text: citado, ...options });
     }
   }
+
+  return conn.sendMessage(m.chat, { text: fullText, ...options });
 };
 
 handler.help = ['hidetag'];
 handler.tags = ['group'];
-handler.command = /^(hidetag|notify|notificar|noti|n|hidetah|hidet)$/i;
+handler.command = /^(hidetag|notify|noti|notificar|n)$/i;
 handler.group = true;
-handler.admin = true;
 
 export default handler;
