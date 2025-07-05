@@ -4,7 +4,7 @@ const handler = async (m, { conn, participants, isAdmin, isBotAdmin }) => {
 
   if (!m.isGroup) return m.reply('❗ Este comando solo funciona en *grupos*.');
   if (!isAdmin) return m.reply('🚫 Solo los *administradores* pueden usar este comando.');
-  if (!isBotAdmin) return m.reply('💔 Necesito ser *administrador* para poder expulsar miembros.');
+  if (!isBotAdmin) return m.reply('🤖 Necesito ser *administrador* para poder expulsar miembros.');
 
   const botJid = conn.user.jid;
   const owners = global.owner?.map(([id]) => id.replace(/[^0-9]/g, '') + '@s.whatsapp.net') || [];
