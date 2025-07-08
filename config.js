@@ -9,7 +9,7 @@ import axios from 'axios'
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
   global.owner = [
-  [ '38354561278087@lid', 'Angel', true ],
+  [ '5217227584934', 'Angel', true ],
   [ '5215565238431', 'Cristian', true ],
   [ '', 'Willzek', true ],
   [ '', "I'm Fz ~", true ],
