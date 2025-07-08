@@ -13,35 +13,42 @@ const handler = async (m, { conn, text, participants, isAdmin, isBotAdmin, isOwn
   if (m.quoted) {
     const quoted = m.quoted;
     const mime = (quoted.msg || quoted)?.mimetype || '';
-    const media = /image|video|sticker|audio/.test(mime) ? await quoted.download() : null;
+    const isMedia = /image|video|audio|sticker/.test(mime);
 
-    if (/image/.test(mime)) {
-      const originalCaption = quoted.caption || quoted.text || '';
-      const captionFinal = originalCaption ? `${originalCaption}\n\n${firma}` : mensaje;
-      return conn.sendMessage(m.chat, {
-        image: media,
-        caption: captionFinal,
-        ...options
-      });
-    } else if (/video/.test(mime)) {
-      const originalCaption = quoted.caption || quoted.text || '';
-      const captionFinal = originalCaption ? `${originalCaption}\n\n${firma}` : mensaje;
-      return conn.sendMessage(m.chat, {
-        video: media,
-        caption: captionFinal,
-        mimetype: 'video/mp4',
-        ...options
-      });
-    } else if (/audio/.test(mime)) {
-      return conn.sendMessage(m.chat, {
-        audio: media,
-        mimetype: 'audio/mpeg',
-        ptt: true,
-        ...options
-      });
-    } else if (/sticker/.test(mime)) {
-      await conn.sendMessage(m.chat, { sticker: media, ...options });
-      return conn.sendMessage(m.chat, { text: mensaje, ...options });
+    if (isMedia) {
+      const media = await quoted.download();
+      if (!media) return m.reply('❌ No se pudo descargar el contenido citado.');
+
+      if (/image/.test(mime)) {
+        return conn.sendMessage(m.chat, {
+          image: media,
+          caption: mensaje,
+          ...options
+        });
+      }
+
+      if (/video/.test(mime)) {
+        return conn.sendMessage(m.chat, {
+          video: media,
+          caption: mensaje,
+          mimetype: 'video/mp4',
+          ...options
+        });
+      }
+
+      if (/audio/.test(mime)) {
+        return conn.sendMessage(m.chat, {
+          audio: media,
+          mimetype: 'audio/mpeg',
+          ptt: true,
+          ...options
+        });
+      }
+
+      if (/sticker/.test(mime)) {
+        await conn.sendMessage(m.chat, { sticker: media, ...options });
+        return conn.sendMessage(m.chat, { text: mensaje, ...options });
+      }
     } else {
       const citado = quoted.text || quoted.body || '';
       return conn.sendMessage(m.chat, {
