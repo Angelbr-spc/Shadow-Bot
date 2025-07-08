@@ -16,15 +16,19 @@ const handler = async (m, { conn, text, participants, isAdmin, isBotAdmin, isOwn
     const media = /image|video|sticker|audio/.test(mime) ? await quoted.download() : null;
 
     if (/image/.test(mime)) {
+      const originalCaption = quoted.caption || quoted.text || '';
+      const captionFinal = originalCaption ? `${originalCaption}\n\n${firma}` : mensaje;
       return conn.sendMessage(m.chat, {
         image: media,
-        caption: mensaje,
+        caption: captionFinal,
         ...options
       });
     } else if (/video/.test(mime)) {
+      const originalCaption = quoted.caption || quoted.text || '';
+      const captionFinal = originalCaption ? `${originalCaption}\n\n${firma}` : mensaje;
       return conn.sendMessage(m.chat, {
         video: media,
-        caption: mensaje,
+        caption: captionFinal,
         mimetype: 'video/mp4',
         ...options
       });
@@ -36,11 +40,9 @@ const handler = async (m, { conn, text, participants, isAdmin, isBotAdmin, isOwn
         ...options
       });
     } else if (/sticker/.test(mime)) {
-      // Los stickers no pueden tener caption, así que mandamos sticker + texto aparte
       await conn.sendMessage(m.chat, { sticker: media, ...options });
       return conn.sendMessage(m.chat, { text: mensaje, ...options });
     } else {
-      // En caso de texto citado
       const citado = quoted.text || quoted.body || '';
       return conn.sendMessage(m.chat, {
         text: `${citado}\n\n${firma}`,
