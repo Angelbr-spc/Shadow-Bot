@@ -1,12 +1,12 @@
 import fetch from 'node-fetch';
 
-let handler = async (m, { conn, usedPrefix, command, text }) => {
+let handler = async (m, { conn, text }) => {
   if (!text) {
     await m.react('📀');
     return m.reply(`╭─⬣「 𝐀𝐧𝐠𝐞𝐥 」⬣
 │  ❗ *Uso Incorrecto*
 │  ➤ Ingresa un texto para buscar en YouTube.
-│  ➤ *Ejemplo:* ${usedPrefix + command} Shakira
+│  ➤ *Ejemplo:* play Shakira
 ╰`);
   }
 
@@ -71,8 +71,12 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
   }
 };
 
-handler.command = ['play', 'playaudio'];
-handler.help = ['play <texto>', 'playaudio <texto>'];
+// ✅ Sin prefijo, detecta mensajes tipo "play <canción>"
+handler.command = /^$/;
+handler.customPrefix = /^play\s+/i;
+handler.explicit = true;
+
+handler.help = ['play <texto>'];
 handler.tags = ['media'];
 
 export default handler;
