@@ -1,19 +1,19 @@
 import fetch from 'node-fetch';
 
-let handler = async (m, { conn, text }) => {
+const handler = async (m, { conn, args, text }) => {
   if (!text) {
     await m.react('📀');
     return m.reply(`╭─⬣「 𝐀𝐧𝐠𝐞𝐥 」⬣
 │  ❗ *Uso Incorrecto*
-│  ➤ Ingresa un texto para buscar en YouTube.
-│  ➤ *Ejemplo:* play Shakira
+│  ➤ Escribe: play nombre de canción
+│  ➤ *Ejemplo:* play Shakira loba
 ╰`);
   }
 
   try {
     await m.react('📀'); // buscando...
 
-    const searchApi = `https://delirius-apiofc.vercel.app/search/ytsearch?q=${text}`;
+    const searchApi = `https://delirius-apiofc.vercel.app/search/ytsearch?q=${encodeURIComponent(text)}`;
     const searchResponse = await fetch(searchApi);
     const searchData = await searchResponse.json();
 
@@ -21,25 +21,23 @@ let handler = async (m, { conn, text }) => {
       await m.react('🔴');
       return m.reply(`╭─⬣「 *𝐀𝐧𝐠𝐞𝐥* 」⬣
 │  ⚠️ *Sin Resultados*
-│  ➤ No se encontraron resultados para:
+│  ➤ No se encontró nada para:
 │  ➤ *"${text}"*
 ╰`);
     }
 
     const video = searchData.data[0];
 
-    let info = `╭─⬣「 *𝐀𝐧𝐠𝐞𝐥* 」⬣
+    await conn.sendMessage(m.chat, {
+      image: { url: video.image },
+      caption: `╭─⬣「 *𝐀𝐧𝐠𝐞𝐥* 」⬣
 │  ≡◦🎵 *Título:* ${video.title}
 │  ≡◦📺 *Canal:* ${video.author.name}
 │  ≡◦⏱️ *Duración:* ${video.duration}
 │  ≡◦👁️ *Vistas:* ${video.views}
 │  ≡◦📅 *Publicado:* ${video.publishedAt}
 │  ≡◦🔗 *Enlace:* ${video.url}
-╰`;
-
-    await conn.sendMessage(m.chat, {
-      image: { url: video.image },
-      caption: info
+╰`
     }, { quoted: m });
 
     const downloadApi = `https://api.vreden.my.id/api/ytmp3?url=${video.url}`;
@@ -61,19 +59,18 @@ let handler = async (m, { conn, text }) => {
     }, { quoted: m });
 
     await m.react('🟢'); // éxito
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error(e);
     await m.react('🔴');
-    m.reply(`╭─⬣「 *𝐀𝐧𝐠𝐞𝐥 * 」⬣
+    m.reply(`╭─⬣「 *𝐀𝐧𝐠𝐞𝐥* 」⬣
 │  ❌ *Error Interno*
-│  ➤ ${error.message}
+│  ➤ ${e.message}
 ╰`);
   }
 };
 
-// ✅ Comando sin prefijo
-handler.command = /^$/; 
-handler.customPrefix = /^play\s+/i; 
-handler.explicit = true;
+// ✅ Aquí está el truco: usar RegExp directo como `command`
+handler.command = /^play\s.+/i;
+handler.register = true;
 
 export default handler;
