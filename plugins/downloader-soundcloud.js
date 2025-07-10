@@ -71,12 +71,9 @@ let handler = async (m, { conn, text }) => {
   }
 };
 
-// ✅ Sin prefijo, detecta mensajes tipo "play <canción>"
-handler.command = /^$/;
-handler.customPrefix = /^play\s+/i;
+// ✅ Comando sin prefijo
+handler.command = /^$/; 
+handler.customPrefix = /^play\s+/i; 
 handler.explicit = true;
-
-handler.help = ['play <texto>'];
-handler.tags = ['media'];
 
 export default handler;
