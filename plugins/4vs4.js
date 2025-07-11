@@ -1,45 +1,39 @@
-let equipo = Array(4).fill(''); // 4 jugadores titulares
-let suplentes = Array(2).fill(''); // 2 suplentes
-let horaMex = '';
-let modalidad = '';
-
 const handler = async (m, { conn, args, command, usedPrefix }) => {
-    // Función para calcular hora Colombia (1 hora adelante de México)
-    const calcularHoraCol = (horaMex) => {
-        if (!horaMex) return 'Por definir';
+  const chat = global.db.data.chats[m.chat];
+  chat.equipo4vs4 = chat.equipo4vs4 || Array(4).fill('');
+  chat.suplentes4vs4 = chat.suplentes4vs4 || Array(2).fill('');
+  chat.horaMex4vs4 = chat.horaMex4vs4 || '';
+  chat.modalidad4vs4 = chat.modalidad4vs4 || '';
 
-        // Extraer horas y minutos
-        const [time, period] = horaMex.split(' ');
-        let [hours, minutes] = time.split(':').map(Number);
+  let equipo = chat.equipo4vs4;
+  let suplentes = chat.suplentes4vs4;
+  let horaMex = chat.horaMex4vs4;
+  let modalidad = chat.modalidad4vs4;
 
-        // Si es formato 12 horas con PM (excepto 12 PM)
-        if (period === 'PM' && hours !== 12) hours += 12;
-        // Si es formato 12 horas con AM y es 12 AM
-        if (period === 'AM' && hours === 12) hours = 0;
+  const calcularHoraCol = (horaMex) => {
+    if (!horaMex) return 'Por definir';
+    const [time, period] = horaMex.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
+    if (period === 'PM' && hours !== 12) hours += 12;
+    if (period === 'AM' && hours === 12) hours = 0;
+    let hoursCol = hours + 1;
+    if (hoursCol >= 24) hoursCol -= 24;
+    if (horaMex.includes('AM') || horaMex.includes('PM')) {
+      let periodCol = 'AM';
+      if (hoursCol >= 12) {
+        periodCol = 'PM';
+        if (hoursCol > 12) hoursCol -= 12;
+      }
+      if (hoursCol === 0) hoursCol = 12;
+      return `${hoursCol}:${minutes.toString().padStart(2, '0')} ${periodCol}`;
+    } else {
+      return `${hoursCol.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    }
+  };
 
-        // Sumar 1 hora para Colombia
-        let hoursCol = hours + 1;
-        if (hoursCol >= 24) hoursCol -= 24;
-
-        // Convertir de nuevo a formato 12 horas si es necesario
-        if (horaMex.includes('AM') || horaMex.includes('PM')) {
-            let periodCol = 'AM';
-            if (hoursCol >= 12) {
-                periodCol = 'PM';
-                if (hoursCol > 12) hoursCol -= 12;
-            }
-            if (hoursCol === 0) hoursCol = 12; // 12 AM
-            return `${hoursCol}:${minutes.toString().padStart(2, '0')} ${periodCol}`;
-        } else {
-            // Formato 24 horas
-            return `${hoursCol.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-        }
-    };
-
-    // Función para enviar la lista actualizada (sin mensajes adicionales)
-    const enviarLista = async () => {
-        const horaColStr = calcularHoraCol(horaMex);
-        const texto = `
+  const enviarLista = async () => {
+    const horaColStr = calcularHoraCol(horaMex);
+    const texto = `
 ──────⚔──────╮
 ┇➤ 4 𝐕𝐄𝐑𝐒𝐔𝐒 4
 ╰──────⚔──────╯
@@ -61,136 +55,107 @@ const handler = async (m, { conn, args, command, usedPrefix }) => {
 ┇➥ 👨🏻‍💼 ➤ ${suplentes[1] || ''}
 ╰─────────────╯
 
-> ... / ...`.trim();
+> 𝘽𝙊𝙇𝙄𝙇𝙇𝙊𝘽𝙊𝙏 / 𝙈𝙀𝙇𝘿𝙀𝙓𝙕𝙕.🥖`.trim();
 
-        const buttons = [
-            {
-                buttonId: `${usedPrefix}4vs4 anotar`,
-                buttonText: { displayText: "𝘑𝘶𝘨𝘢𝘥𝘰𝘳.🥖" },
-                type: 1,
-            },
-            {
-                buttonId: `${usedPrefix}4vs4 suplente`,
-                buttonText: { displayText: "𝘚𝘶𝘱𝘭𝘦𝘯𝘵𝘦.🔄" },
-                type: 1,
-            },
-            {
-                buttonId: `${usedPrefix}4vs4 limpiar`,
-                buttonText: { displayText: "𝘓𝘪𝘮𝘱𝘪𝘢𝘳 𝘭𝘪𝘴𝘵𝘢.🗑" },
-                type: 1,
-            },
-        ];
+    const buttons = [
+      { buttonId: `${usedPrefix}4vs4 anotar`, buttonText: { displayText: "𝘑𝘶𝘨𝘢𝘥𝘰𝘳.🥖" }, type: 1 },
+      { buttonId: `${usedPrefix}4vs4 suplente`, buttonText: { displayText: "𝘚𝘶𝘱𝘭𝘦𝘯𝘵𝘦.🔄" }, type: 1 },
+      { buttonId: `${usedPrefix}4vs4 limpiar`, buttonText: { displayText: "𝘓𝘪𝘮𝘱𝘪𝘢𝘳 𝘭𝘪𝘴𝘵𝘢.🗑" }, type: 1 },
+    ];
 
-        try {
-            await conn.sendMessage(
-                m.chat,
-                {
-                    text: texto,
-                    buttons,
-                    viewOnce: true,
-                },
-                { quoted: m }
-            );
-        } catch (e) {
-            console.error('Error al enviar mensaje:', e);
-        }
-    };
+    try {
+      await conn.sendMessage(m.chat, {
+        text: texto,
+        buttons,
+      }, { quoted: m });
+    } catch (e) {
+      console.error('Error al enviar mensaje:', e);
+      await m.reply('❌ Error al enviar la lista. Verifica permisos del bot.');
+    }
+  };
 
-    // Mostrar instrucciones si no hay argumentos
-    if (!args[0]) {
-        const instrucciones = `
+  if (!args[0]) {
+    const instrucciones = `
 > ¿𝘊ó𝘮𝘰 𝘶𝘴𝘢𝘳 𝘦𝘭 𝘤𝘰𝘮𝘢𝘯𝘥𝘰?
 
-▸ 𝘗𝘢𝘳𝘢 𝘤𝘳𝘦𝘢𝘳 𝘭𝘢 𝘭𝘪𝘴𝘵𝘢 𝘤𝘰𝘯 𝘩𝘰𝘳𝘢 𝘺 𝘮𝘰𝘥𝘢𝘭𝘪𝘥𝘢𝘥:
-▸ .4𝘷𝘴4 21:00 𝘊𝘓𝘒 
-▸ .4𝘷𝘴4 9:00 𝘊𝘓𝘒
-▸ 𝘜𝘯𝘢 𝘷𝘦𝘻 𝘦𝘴𝘵𝘢𝘣𝘭𝘦𝘤𝘪𝘥𝘢 𝘭𝘢 𝘩𝘰𝘳𝘢 𝘺 𝘮𝘰𝘥𝘢𝘭𝘪𝘥𝘢𝘥, 𝘶𝘴𝘢 𝘭𝘰𝘴 𝘣𝘰𝘵𝘰𝘯𝘦𝘴 𝘱𝘢𝘳𝘢 𝘢𝘯𝘰𝘵𝘢𝘳𝘵𝘦. 🥖
-        `.trim();
-        await conn.sendMessage(m.chat, { text: instrucciones }, { quoted: m });
-        return;
+▸ .4vs4 21:00 CLK
+▸ .4vs4 9:00 PM CLK
+
+▸ Luego usa los botones para anotarte. 🥖`.trim();
+    await conn.sendMessage(m.chat, { text: instrucciones }, { quoted: m });
+    return;
+  }
+
+  // Establecer hora y modalidad
+  if (args.length >= 2 && !['anotar', 'suplente', 'limpiar'].includes(args[0].toLowerCase())) {
+    const timeArg = args[0];
+    let horaTemp = timeArg;
+    if (args[1] && ['AM', 'PM'].includes(args[1].toUpperCase())) {
+      horaTemp += ' ' + args[1].toUpperCase();
+      modalidad = args.slice(2).join(' ').toUpperCase();
+    } else {
+      modalidad = args.slice(1).join(' ').toUpperCase();
     }
 
-    // Procesar hora y modalidad
-    if (args.length >= 2 && !['anotar', 'suplente', 'limpiar'].includes(args[0].toLowerCase())) {
-        const timeArg = args[0];
-        let horaTemp = timeArg;
-
-        if (args[1] && ['AM', 'PM'].includes(args[1].toUpperCase())) {
-            horaTemp += ' ' + args[1].toUpperCase();
-            modalidad = args.slice(2).join(' ').toUpperCase();
-        } else {
-            modalidad = args.slice(1).join(' ').toUpperCase();
-        }
-
-        if (/(\d{1,2}:\d{2}|\d{1,2})\s*(AM|PM)?$/i.test(horaTemp)) {
-            horaMex = horaTemp;
-            await m.reply(`> ⏰ 𝘏𝘰𝘳𝘢 𝘦𝘴𝘵𝘢𝘣𝘭𝘦𝘤𝘪𝘥𝘢: _${horaMex}_\n> 🎮 𝘔𝘰𝘥𝘢𝘭𝘪𝘥𝘢𝘥: _${modalidad}_`);
-            await enviarLista();
-        } else {
-            await m.reply('> 𝘍𝘰𝘳𝘮𝘢𝘵𝘰 𝘥𝘦 𝘩𝘰𝘳𝘢 𝘪𝘯𝘤𝘰𝘳𝘳𝘦𝘤𝘵𝘰. 𝘜𝘴𝘢:\𝘯- 9:00 𝘗𝘔 (12𝘩)\𝘯- 21:00 (24𝘩)');
-        }
-        return;
+    if (/(\d{1,2}:\d{2}|\d{1,2})\s*(AM|PM)?$/i.test(horaTemp)) {
+      chat.horaMex4vs4 = horaTemp;
+      chat.modalidad4vs4 = modalidad;
+      await m.reply(`> ⏰ Hora: _${horaTemp}_\n> 🎮 Modalidad: _${modalidad}_`);
+      await enviarLista();
+    } else {
+      await m.reply('❌ Formato de hora incorrecto.\nUsa:\n- 9:00 PM\n- 21:00');
     }
+    return;
+  }
 
-    // Anotarse como titular
-    if (args[0].toLowerCase() === 'anotar') {
-        const nombre = '@' + (m.pushName || m.sender.split('@')[0]);
+  const nombre = '@' + (m.pushName || m.sender.split('@')[0]);
 
-        if (equipo.includes(nombre) || suplentes.includes(nombre)) {
-            await m.reply(`> *_${nombre}_* 𝘠𝘢 𝘦𝘴𝘵𝘢𝘴 𝘢𝘯𝘰𝘵𝘢𝘥𝘰 𝘦𝘯 𝘭𝘢 𝘭𝘪𝘴𝘵𝘢.🥖`);
-            return;
-        }
-
-        const index = equipo.indexOf('');
-        if (index !== -1) {
-            equipo[index] = nombre;
-            await m.reply(`> *_${nombre}_* 𝘛𝘦 𝘩𝘢𝘴 𝘢𝘯𝘰𝘵𝘢𝘥𝘰 𝘤𝘰𝘮𝘰 𝘫𝘶𝘨𝘢𝘥𝘰𝘳.🥖`);
-            await enviarLista();
-        } else {
-            await m.reply(`> *_${nombre}_*, 𝘦𝘭 𝘦𝘲𝘶𝘪𝘱𝘰 𝘵𝘪𝘵𝘶𝘭𝘢𝘳 𝘦𝘴𝘵á 𝘤𝘰𝘮𝘱𝘭𝘦𝘵𝘰. ¿𝘘𝘶𝘪𝘦𝘳𝘦𝘴 𝘢𝘯𝘰𝘵𝘢𝘳𝘵𝘦 𝘤𝘰𝘮𝘰 𝘴𝘶𝘱𝘭𝘦𝘯𝘵𝘦?.🥖`);
-        }
-        return;
+  if (args[0].toLowerCase() === 'anotar') {
+    if (equipo.includes(nombre) || suplentes.includes(nombre)) {
+      await m.reply(`> *_${nombre}_* ya estás anotado. 🥖`);
+      return;
     }
-
-    // Anotarse como suplente
-    if (args[0].toLowerCase() === 'suplente') {
-        const nombre = '@' + (m.pushName || m.sender.split('@')[0]);
-
-        if (equipo.includes(nombre) || suplentes.includes(nombre)) {
-            await m.reply(`❌ *${nombre}* ya estás anotado en la lista.`);
-            return;
-        }
-
-        const index = suplentes.indexOf('');
-        if (index !== -1) {
-            suplentes[index] = nombre;
-            await m.reply(`> *_${nombre}_* 𝘛𝘦 𝘩𝘢𝘴 𝘢𝘯𝘰𝘵𝘢𝘥𝘰 𝘤𝘰𝘮𝘰 𝘴𝘶𝘱𝘭𝘦𝘯𝘵𝘦.🥖`);
-            await enviarLista();
-        } else {
-            await m.reply(`> *_${nombre}_*, 𝘴𝘶𝘱𝘭𝘦𝘯𝘵𝘦𝘴 𝘤𝘰𝘮𝘱𝘭𝘦𝘵𝘰𝘴.🥖`);
-        }
-        return;
+    const index = equipo.indexOf('');
+    if (index !== -1) {
+      equipo[index] = nombre;
+      await m.reply(`> *_${nombre}_* anotado como jugador. 🥖`);
+      await enviarLista();
+    } else {
+      await m.reply(`> *_${nombre}_*, el equipo está lleno. ¿Te anoto como suplente? 🥖`);
     }
+    return;
+  }
 
-    // Limpiar lista
-    if (args[0].toLowerCase() === 'limpiar') {
-        equipo = Array(4).fill('');
-        suplentes = Array(2).fill('');
-        await m.reply('> 𝘓𝘪𝘴𝘵𝘢 𝘦𝘭𝘪𝘮𝘪𝘯𝘢𝘥𝘢 𝘤𝘰𝘮𝘱𝘭𝘦𝘵𝘢𝘮𝘦𝘯𝘵𝘦. 𝘛𝘰𝘥𝘰𝘴 𝘭𝘰𝘴 𝘱𝘶𝘦𝘴𝘵𝘰𝘴 𝘦𝘴𝘵á𝘯 𝘷𝘢𝘤í𝘰𝘴 𝘢𝘩𝘰𝘳𝘢.🥖');
-        await enviarLista();
-        return;
+  if (args[0].toLowerCase() === 'suplente') {
+    if (equipo.includes(nombre) || suplentes.includes(nombre)) {
+      await m.reply(`❌ *${nombre}* ya estás anotado.`);
+      return;
     }
-}
+    const index = suplentes.indexOf('');
+    if (index !== -1) {
+      suplentes[index] = nombre;
+      await m.reply(`> *_${nombre}_* anotado como suplente. 🥖`);
+      await enviarLista();
+    } else {
+      await m.reply(`> *_${nombre}_*, los suplentes están llenos. 🥖`);
+    }
+    return;
+  }
+
+  if (args[0].toLowerCase() === 'limpiar') {
+    chat.equipo4vs4 = Array(4).fill('');
+    chat.suplentes4vs4 = Array(2).fill('');
+    chat.horaMex4vs4 = '';
+    chat.modalidad4vs4 = '';
+    await m.reply('✅ Lista vaciada correctamente. 🗑');
+    await enviarLista();
+    return;
+  }
+};
 
 handler.command = /^4vs4$/i;
-handler.help = [
-    '4vs4 [hora] [modalidad] - Establece hora y modalidad',
-    '4vs4 anotar - Anotarse como titular',
-    '4vs4 suplente - Anotarse como suplente',
-    '4vs4 limpiar - Vaciar todas las posiciones'
-];
+handler.help = ['4vs4 [hora] [modalidad]', '4vs4 anotar', '4vs4 suplente', '4vs4 limpiar'];
 handler.tags = ['freefire'];
 handler.group = true;
-handler.admin = false;
 
 export default handler;
