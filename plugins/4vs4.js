@@ -32,7 +32,7 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
   };
 
   const enviarLista = async () => {
-    const horaColStr = calcularHoraCol(horaMex);
+    const horaColStr = horaMex ? calcularHoraCol(horaMex) : 'Por definir';
     const texto = `
 ──────⚔──────╮
 ┇➤ 4 𝐕𝐄𝐑𝐒𝐔𝐒 4
