@@ -1,4 +1,4 @@
-const handler = async (m, { conn, args, command, usedPrefix }) => {
+const handler = async (m, { conn, args, usedPrefix, command }) => {
   const chat = global.db.data.chats[m.chat];
   chat.equipo4vs4 = chat.equipo4vs4 || Array(4).fill('');
   chat.suplentes4vs4 = chat.suplentes4vs4 || Array(2).fill('');
@@ -55,39 +55,71 @@ const handler = async (m, { conn, args, command, usedPrefix }) => {
 ┇➥ 👨🏻‍💼 ➤ ${suplentes[1] || ''}
 ╰─────────────╯
 
-> ... / ...`.trim();
+Comandos disponibles:
+• ${usedPrefix}4vs4 anotar
+• ${usedPrefix}4vs4 suplente
+• ${usedPrefix}4vs4 limpiar`.trim();
 
-    const buttons = [
-      { buttonId: `${usedPrefix}4vs4 anotar`, buttonText: { displayText: "𝘑𝘶𝘨𝘢𝘥𝘰𝘳.🥖" }, type: 1 },
-      { buttonId: `${usedPrefix}4vs4 suplente`, buttonText: { displayText: "𝘚𝘶𝘱𝘭𝘦𝘯𝘵𝘦.🔄" }, type: 1 },
-      { buttonId: `${usedPrefix}4vs4 limpiar`, buttonText: { displayText: "𝘓𝘪𝘮𝘱𝘪𝘢𝘳 𝘭𝘪𝘴𝘵𝘢.🗑" }, type: 1 },
-    ];
-
-    try {
-      await conn.sendMessage(m.chat, {
-        text: texto,
-        buttons,
-      }, { quoted: m });
-    } catch (e) {
-      console.error('Error al enviar mensaje:', e);
-      await m.reply('❌ Error al enviar la lista. Verifica permisos del bot.');
-    }
+    await conn.sendMessage(m.chat, { text: texto }, { quoted: m });
   };
 
   if (!args[0]) {
     const instrucciones = `
 > ¿𝘊ó𝘮𝘰 𝘶𝘴𝘢𝘳 𝘦𝘭 𝘤𝘰𝘮𝘢𝘯𝘥𝘰?
 
-▸ .4vs4 21:00 CLK
-▸ .4vs4 9:00 PM CLK
+▸ ${usedPrefix}4vs4 21:00 CLK
+▸ ${usedPrefix}4vs4 9:00 PM CLK
+▸ ${usedPrefix}4vs4 anotar
+▸ ${usedPrefix}4vs4 suplente
+▸ ${usedPrefix}4vs4 limpiar`.trim();
+    await m.reply(instrucciones);
+    return;
+  }
 
-▸ Luego usa los botones para anotarte. 🥖`.trim();
-    await conn.sendMessage(m.chat, { text: instrucciones }, { quoted: m });
+  const nombre = '@' + (m.pushName || m.sender.split('@')[0]);
+
+  if (args[0].toLowerCase() === 'anotar') {
+    if (equipo.includes(nombre) || suplentes.includes(nombre)) {
+      return await m.reply(`> *_${nombre}_* ya estás anotado. 🥖`);
+    }
+    const index = equipo.indexOf('');
+    if (index !== -1) {
+      equipo[index] = nombre;
+      await m.reply(`> *_${nombre}_* anotado como jugador. 🥖`);
+    } else {
+      await m.reply(`> *_${nombre}_*, el equipo ya está lleno. ¿Quieres usar ${usedPrefix}4vs4 suplente? 🥖`);
+    }
+    await enviarLista();
+    return;
+  }
+
+  if (args[0].toLowerCase() === 'suplente') {
+    if (equipo.includes(nombre) || suplentes.includes(nombre)) {
+      return await m.reply(`> *_${nombre}_* ya estás anotado. 🥖`);
+    }
+    const index = suplentes.indexOf('');
+    if (index !== -1) {
+      suplentes[index] = nombre;
+      await m.reply(`> *_${nombre}_* anotado como suplente. 🥖`);
+    } else {
+      await m.reply(`> *_${nombre}_*, ya no hay lugares como suplente. 🥖`);
+    }
+    await enviarLista();
+    return;
+  }
+
+  if (args[0].toLowerCase() === 'limpiar') {
+    chat.equipo4vs4 = Array(4).fill('');
+    chat.suplentes4vs4 = Array(2).fill('');
+    chat.horaMex4vs4 = '';
+    chat.modalidad4vs4 = '';
+    await m.reply('✅ Lista borrada. Puedes empezar de nuevo.');
+    await enviarLista();
     return;
   }
 
   // Establecer hora y modalidad
-  if (args.length >= 2 && !['anotar', 'suplente', 'limpiar'].includes(args[0].toLowerCase())) {
+  if (args.length >= 2) {
     const timeArg = args[0];
     let horaTemp = timeArg;
     if (args[1] && ['AM', 'PM'].includes(args[1].toUpperCase())) {
@@ -103,52 +135,8 @@ const handler = async (m, { conn, args, command, usedPrefix }) => {
       await m.reply(`> ⏰ Hora: _${horaTemp}_\n> 🎮 Modalidad: _${modalidad}_`);
       await enviarLista();
     } else {
-      await m.reply('❌ Formato de hora incorrecto.\nUsa:\n- 9:00 PM\n- 21:00');
+      await m.reply('❌ Hora inválida. Usa formato:\n- 9:00 PM\n- 21:00');
     }
-    return;
-  }
-
-  const nombre = '@' + (m.pushName || m.sender.split('@')[0]);
-
-  if (args[0].toLowerCase() === 'anotar') {
-    if (equipo.includes(nombre) || suplentes.includes(nombre)) {
-      await m.reply(`> *_${nombre}_* ya estás anotado. 🥖`);
-      return;
-    }
-    const index = equipo.indexOf('');
-    if (index !== -1) {
-      equipo[index] = nombre;
-      await m.reply(`> *_${nombre}_* anotado como jugador. 🥖`);
-      await enviarLista();
-    } else {
-      await m.reply(`> *_${nombre}_*, el equipo está lleno. ¿Te anoto como suplente? 🥖`);
-    }
-    return;
-  }
-
-  if (args[0].toLowerCase() === 'suplente') {
-    if (equipo.includes(nombre) || suplentes.includes(nombre)) {
-      await m.reply(`❌ *${nombre}* ya estás anotado.`);
-      return;
-    }
-    const index = suplentes.indexOf('');
-    if (index !== -1) {
-      suplentes[index] = nombre;
-      await m.reply(`> *_${nombre}_* anotado como suplente. 🥖`);
-      await enviarLista();
-    } else {
-      await m.reply(`> *_${nombre}_*, los suplentes están llenos. 🥖`);
-    }
-    return;
-  }
-
-  if (args[0].toLowerCase() === 'limpiar') {
-    chat.equipo4vs4 = Array(4).fill('');
-    chat.suplentes4vs4 = Array(2).fill('');
-    chat.horaMex4vs4 = '';
-    chat.modalidad4vs4 = '';
-    await m.reply('✅ Lista vaciada correctamente. 🗑');
-    await enviarLista();
     return;
   }
 };
