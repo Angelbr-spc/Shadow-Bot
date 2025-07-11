@@ -55,7 +55,7 @@ const handler = async (m, { conn, args, command, usedPrefix }) => {
 ┇➥ 👨🏻‍💼 ➤ ${suplentes[1] || ''}
 ╰─────────────╯
 
-> 𝘽𝙊𝙇𝙄𝙇𝙇𝙊𝘽𝙊𝙏 / 𝙈𝙀𝙇𝘿𝙀𝙓𝙕𝙕.🥖`.trim();
+> ... / ...`.trim();
 
     const buttons = [
       { buttonId: `${usedPrefix}4vs4 anotar`, buttonText: { displayText: "𝘑𝘶𝘨𝘢𝘥𝘰𝘳.🥖" }, type: 1 },
