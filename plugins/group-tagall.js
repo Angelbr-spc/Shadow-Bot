@@ -19,7 +19,7 @@ const handler = async (m, { conn, participants, isAdmin, isOwner }) => {
   texto += `*PARA ${participants.length} MIEMBROS* 🗣️\n\n`;
   texto += `https://chat.whatsapp.com/GYOUzzKUAAq4aYgoa0pbzq?mode=r_c\n\n`; // aquí el espacio que querías
 
-  texto += `𝗚𝗥𝗨𝗣𝗢 𝗗𝗘 𝗩𝗘𝗡𝗧𝗔𝗦 𝗕𝗢𝗧𝗦\n`;
+  texto += `𝗚𝗿𝘂𝗽𝗼 𝗱𝗲 𝘃𝗲𝗻𝘁𝗮𝘀 𝗯𝗼𝘁𝘀\n`;
   texto += `𝗕𝗨𝗨 𝗕𝗢𝗧 🔮\n`;
   texto += `𝗕𝗔𝗥𝗗𝗢𝗖𝗞 𝗕𝗢𝗧\n`;
   texto += `𝗦𝗛𝗔𝗗𝗢𝗪 𝗕𝗢𝗧 🍷\n\n`;
