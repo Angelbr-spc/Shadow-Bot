@@ -43,7 +43,12 @@ const handler = async (m, { conn, participants, args, isAdmin, isOwner }) => {
 
   const pesan = args.join` `;
   const oi = `*» INFO :* ${pesan}`;
-  let mensajes = `*!  MENCION GENERAL  !*\n  *PARA ${participants.length} MIEMBROS* 🗣️\n\n ${oi}\n\n╭  ┄ 𝅄  ۪꒰ \`⡞᪲=͟͟͞🄲ꭈׁׅo͓̽ᨰׁׅʙo͓̽tׁׅ ≼᳞ׄ\` ꒱  ۟  𝅄 ┄\n`;
+  let mensajes = `*!  MENCION GENERAL  !*\n  *PARA ${participants.length} MIEMBROS* 🗣️\n\n ${oi}\n\n╭  https://chat.whatsapp.com/GYOUzzKUAAq4aYgoa0pbzq?mode=r_c
+𝗚𝗥𝗨𝗣𝗢 𝗗𝗘 𝗩𝗘𝗡𝗧𝗔𝗦 𝗕𝗢𝗧𝗦 
+
+𝗕𝗨𝗨 𝗕𝗢𝗧 🔮
+𝗕𝗔𝗥𝗗𝗢𝗖𝗞 𝗕𝗢𝗧 
+𝗦𝗛𝗔𝗗𝗢𝗪 𝗕𝗢𝗧 🍷`;
 
   for (const user of participants) {
     const numero = user.id.split('@')[0];
