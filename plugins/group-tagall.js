@@ -25,7 +25,7 @@ const handler = async (m, { conn, participants, isAdmin, isOwner }) => {
   texto += `𝐁𝐮𝐮 𝐁𝐨𝐭 🔮\n`;
   texto += `𝐁𝐚𝐫𝐝𝐨𝐜𝐤 𝐁𝐨𝐭 🔥\n`;
   texto += `𝐒𝐡𝐚𝐝𝐨𝐰 𝐁𝐨𝐭 🍷\n\n`;
-
+  texto += `━━━━━━━━━━━━━━━━━━━\n`;
   for (const user of participants) {
     const numero = user.id.split('@')[0];
     const bandera = obtenerBandera(numero);
