@@ -21,6 +21,7 @@ const handler = async (m, { conn, participants, isAdmin, isOwner }) => {
 
   texto += `𝗚𝗿𝘂𝗽𝗼 𝗱𝗲 𝘃𝗲𝗻𝘁𝗮𝘀 𝗯𝗼𝘁𝘀:\n`;
   texto += `𝗖𝗼𝗻𝘁𝗮𝗺𝗼𝘀 𝗰𝗼𝗻 𝗹𝗼𝘀 𝘀𝗶𝗴𝘂𝗶𝗲𝗻𝘁𝗲𝘀:\n`;
+  texto += `\n`;
   texto += `𝗕𝗨𝗨 𝗕𝗢𝗧 🔮\n`;
   texto += `𝗕𝗔𝗥𝗗𝗢𝗖𝗞 𝗕𝗢𝗧\n`;
   texto += `𝗦𝗛𝗔𝗗𝗢𝗪 𝗕𝗢𝗧 🍷\n\n`;
