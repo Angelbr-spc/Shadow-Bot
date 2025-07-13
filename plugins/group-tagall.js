@@ -71,5 +71,3 @@ handler.admin = true;
 
 export default handler;
 
-We acomodalo para que no esté todo junto xd
-
