@@ -19,7 +19,7 @@ const handler = async (m, { conn, participants, isAdmin, isOwner }) => {
   let texto = `*!  MENCION GENERAL  !*\n  *PARA ${participants.length} MIEMBROS* 🗣️\n\n`;
   texto += `https://chat.whatsapp.com/GYOUzzKUAAq4aYgoa0pbzq?mode=r_c\n`;
 
-  texto += `𝗚𝗥𝗨𝗣𝗢 𝗗𝗘 𝗩𝗘𝗡𝗧𝗔𝗦 𝗕𝗢𝗧𝗦\n│ 𝗕𝗨𝗨 𝗕𝗢𝗧 🔮\n│ 𝗕𝗔𝗥𝗗𝗢𝗖𝗞 𝗕𝗢𝗧\n│ 𝗦𝗛𝗔𝗗𝗢𝗪 𝗕𝗢𝗧 🍷\n\n\n`;
+  texto += `𝗚𝗥𝗨𝗣𝗢 𝗗𝗘 𝗩𝗘𝗡𝗧𝗔𝗦 𝗕𝗢𝗧𝗦\n𝗕𝗨𝗨 𝗕𝗢𝗧 🔮\n𝗕𝗔𝗥𝗗𝗢𝗖𝗞 𝗕𝗢𝗧\n𝗦𝗛𝗔𝗗𝗢𝗪 𝗕𝗢𝗧 🍷\n\n\n`;
 
   for (const user of participants) {
     const numero = user.id.split('@')[0];
