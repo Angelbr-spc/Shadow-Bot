@@ -17,7 +17,7 @@ const handler = async (m, { conn, participants, isAdmin, isOwner }) => {
   if (!(isAdmin || isOwner)) return global.dfail?.('admin', m, conn);
 
   let texto = `*!  MENCION GENERAL  !*\n  *PARA ${participants.length} MIEMBROS* 🗣️\n\n`;
-  texto += `╭ https://chat.whatsapp.com/GYOUzzKUAAq4aYgoa0pbzq?mode=r_c\n`;
+  texto += `https://chat.whatsapp.com/GYOUzzKUAAq4aYgoa0pbzq?mode=r_c\n`;
   texto += `│ 𝗚𝗥𝗨𝗣𝗢 𝗗𝗘 𝗩𝗘𝗡𝗧𝗔𝗦 𝗕𝗢𝗧𝗦\n│ 𝗕𝗨𝗨 𝗕𝗢𝗧 🔮\n│ 𝗕𝗔𝗥𝗗𝗢𝗖𝗞 𝗕𝗢𝗧\n│ 𝗦𝗛𝗔𝗗𝗢𝗪 𝗕𝗢𝗧 🍷\n╰─────────────────────𖠁\n\n`;
 
   for (const user of participants) {
