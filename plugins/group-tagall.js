@@ -19,8 +19,8 @@ const handler = async (m, { conn, participants, isAdmin, isOwner }) => {
   texto += `*PARA ${participants.length} MIEMBROS* 🗣️\n\n`;
   texto += `https://chat.whatsapp.com/GYOUzzKUAAq4aYgoa0pbzq?mode=r_c\n\n`; // aquí el espacio que querías
 
-  texto += `𝗚𝗿𝘂𝗽𝗼 𝗱𝗲 𝘃𝗲𝗻𝘁𝗮𝘀 𝗯𝗼𝘁𝘀:\n`;
-  texto += `𝗖𝗼𝗻𝘁𝗮𝗺𝗼𝘀 𝗰𝗼𝗻 𝗹𝗼𝘀 𝘀𝗶𝗴𝘂𝗶𝗲𝗻𝘁𝗲𝘀:\n`;
+  texto += `𝐆𝐫𝐮𝐩𝐨 𝐃𝐞 𝐕𝐞𝐧𝐭𝐚𝐬 𝐁𝐨𝐭𝐬:\n`;
+  texto += `𝐂𝐨𝐧𝐭𝐚𝐦𝐨𝐬 𝐂𝐨𝐧 𝐋𝐨𝐬 𝐒𝐢𝐠𝐮𝐢𝐞𝐧𝐭𝐞𝐬:\n`;
   texto += `\n`;
   texto += `𝐁𝐮𝐮 𝐁𝐨𝐭 🔮\n`;
   texto += `𝐁𝐚𝐫𝐝𝐨𝐜𝐤 𝐁𝐨𝐭 \n`;
