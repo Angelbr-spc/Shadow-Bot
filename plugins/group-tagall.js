@@ -1,7 +1,6 @@
 const prefijoABandera = {
   '1': '🇺🇸', '52': '🇲🇽', '54': '🇦🇷', '55': '🇧🇷', '57': '🇨🇴', '58': '🇻🇪', '34': '🇪🇸',
   '51': '🇵🇪', '56': '🇨🇱', '593': '🇪🇨', '591': '🇧🇴', '595': '🇵🇾', '502': '🇬🇹', '503': '🇸🇻'
-  // Puedes seguir agregando más si quieres
 };
 
 function obtenerBandera(numero) {
@@ -16,10 +15,14 @@ const handler = async (m, { conn, participants, isAdmin, isOwner }) => {
   if (!m.isGroup) return;
   if (!(isAdmin || isOwner)) return global.dfail?.('admin', m, conn);
 
-  let texto = `*!  MENCION GENERAL  !*\n  *PARA ${participants.length} MIEMBROS* 🗣️\n\n`;
-  texto += `https://chat.whatsapp.com/GYOUzzKUAAq4aYgoa0pbzq?mode=r_c\n`;
+  let texto = `*!  MENCION GENERAL  !*\n`;
+  texto += `*PARA ${participants.length} MIEMBROS* 🗣️\n\n`;
+  texto += `https://chat.whatsapp.com/GYOUzzKUAAq4aYgoa0pbzq?mode=r_c\n\n`; // aquí el espacio que querías
 
-  texto += `𝗚𝗥𝗨𝗣𝗢 𝗗𝗘 𝗩𝗘𝗡𝗧𝗔𝗦 𝗕𝗢𝗧𝗦\n𝗕𝗨𝗨 𝗕𝗢𝗧 🔮\n𝗕𝗔𝗥𝗗𝗢𝗖𝗞 𝗕𝗢𝗧\n𝗦𝗛𝗔𝗗𝗢𝗪 𝗕𝗢𝗧 🍷\n\n\n`;
+  texto += `𝗚𝗥𝗨𝗣𝗢 𝗗𝗘 𝗩𝗘𝗡𝗧𝗔𝗦 𝗕𝗢𝗧𝗦\n`;
+  texto += `𝗕𝗨𝗨 𝗕𝗢𝗧 🔮\n`;
+  texto += `𝗕𝗔𝗥𝗗𝗢𝗖𝗞 𝗕𝗢𝗧\n`;
+  texto += `𝗦𝗛𝗔𝗗𝗢𝗪 𝗕𝗢𝗧 🍷\n\n`;
 
   for (const user of participants) {
     const numero = user.id.split('@')[0];
